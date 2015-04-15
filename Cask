@@ -1,3 +1,12 @@
+(source gnu)
 (source melpa)
 
+(depends-on "ace-jump-mode")
+(depends-on "elpy")
+(depends-on "flycheck-pyflakes")
+(depends-on "helm")
+(depends-on "helm-git-grep")
+(depends-on "helm-themes")
+(depends-on "magit")
+(depends-on "monokai-theme")
 (depends-on "pallet")
