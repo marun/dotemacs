@@ -10,3 +10,4 @@
 (depends-on "magit")
 (depends-on "monokai-theme")
 (depends-on "pallet")
+(depends-on "pbcopy")

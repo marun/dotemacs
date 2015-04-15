@@ -128,3 +128,12 @@
 ;;; Flyspell
 ;; Fix aspell compatibility
 (setq ispell-list-command "--list")
+
+
+;;; OS X-specific fixup
+(when (equal (symbol-name system-type) "darwin")
+  ;; Fix x11 support
+  (setq mac-option-modifier 'meta)
+  ;; Enable copy-paste integration on os x
+  (require 'pbcopy)
+  (turn-on-pbcopy))
