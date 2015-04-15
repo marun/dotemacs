@@ -9,5 +9,6 @@
 (depends-on "helm-themes")
 (depends-on "magit")
 (depends-on "monokai-theme")
+(depends-on "org")
 (depends-on "pallet")
 (depends-on "pbcopy")
