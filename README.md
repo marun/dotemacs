@@ -15,5 +15,19 @@ reset.  Changes include:
  - No more custom-set-*.  All important variables are explicitly set
    with comments where appropriate.
 
+ - Shiny new tools like [helm](https://github.com/emacs-helm/helm),
+   [projectile](https://github.com/bbatsov/projectile),
+   [magit](http://magit.vc/).
+
+ - Navigation niceties like
+   [AceJump](http://www.emacswiki.org/emacs/AceJump) and [Key
+   Chord](http://www.emacswiki.org/emacs/KeyChord).
+
 I'm looking forward to minimizing cruft so that I can evolve my
 configuration more freely.
+
+Some great resources for Emacs inspiration:
+
+- <http://emacsredux.com/>
+- <http://tuhdo.github.io/>
+- <http://sachachua.com/blog/category/geek/emacs/>

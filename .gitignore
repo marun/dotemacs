@@ -1,4 +1,6 @@
 .cask
+.session
 auto-save-list
 backups
+projectile-bookmarks.eld
 saved-places
