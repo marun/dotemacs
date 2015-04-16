@@ -2,8 +2,11 @@
 (source melpa)
 
 (depends-on "ace-jump-mode")
+(depends-on "company-go")
 (depends-on "elpy")
 (depends-on "flycheck-pyflakes")
+(depends-on "go-errcheck")
+(depends-on "go-mode")
 (depends-on "helm")
 (depends-on "helm-git-grep")
 (depends-on "helm-themes")

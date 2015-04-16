@@ -116,6 +116,21 @@
   (add-hook 'elpy-mode-hook 'flycheck-mode))
 
 
+;;; Go
+(add-hook 'before-save-hook 'gofmt-before-save)
+(add-hook 'go-mode-hook '(lambda ()
+  (local-set-key (kbd "C-c i") 'go-goto-imports)
+  (local-set-key (kbd "C-c C-r") 'go-remove-unused-imports)
+  (local-set-key (kbd "C-c C-k") 'godoc)
+  (local-set-key (kbd "C-c C-f") 'gofmt)
+  (set (make-local-variable 'company-backends) '(company-go))
+  (company-mode)
+  (add-to-list 'load-path
+               (concat (getenv "GOPATH") "/src/github.com/dougm/goflymake"))
+  (require 'go-flymake)
+  ))
+
+
 ;;; Ace jump mode
 (autoload
   'ace-jump-mode
