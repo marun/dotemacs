@@ -89,7 +89,7 @@
 (key-chord-define-global "xg" 'helm-projectile-grep)
 (key-chord-define-global "xh" 'helm-projectile)
 (key-chord-define-global "xn" 'helm-projectile-find-file-in-known-projects)
-(key-chord-define-global "xx" 'execute-extended-command)
+(key-chord-define-global "xx" 'helm-M-x)
 
 
 ;;; Enable backup files.
