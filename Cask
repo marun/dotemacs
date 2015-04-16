@@ -21,5 +21,6 @@
 (depends-on "org")
 (depends-on "pallet")
 (depends-on "pbcopy")
+(depends-on "puppet-mode")
 (depends-on "session")
 (depends-on "undo-tree")
