@@ -24,3 +24,4 @@
 (depends-on "puppet-mode")
 (depends-on "session")
 (depends-on "undo-tree")
+(depends-on "yaml-mode")
