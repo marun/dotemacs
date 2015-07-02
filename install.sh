@@ -8,7 +8,9 @@ if [ ! -d ~/.cask ]; then
     curl -fsSL https://raw.githubusercontent.com/cask/cask/master/go | python
 fi
 
-cask install
+pushd $(dirname $0)
+~/.cask/bin/cask install
+popd
 
 # On OS X, homebrew pip will configure a local install path by
 # default, and passing --user on the commandline will cause an error.
