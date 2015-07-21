@@ -162,6 +162,10 @@
   ))
 
 
+;;; Javascript
+(setq js-indent-level 2)
+
+
 ;;; Flyspell
 ;; Fix aspell compatibility
 (setq ispell-list-command "--list")
