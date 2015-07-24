@@ -149,7 +149,11 @@
 
 ;;; Go
 (add-hook 'before-save-hook 'gofmt-before-save)
+(defun go-run-buffer()
+  (interactive)
+  (shell-command (concat "go run " (buffer-name))))
 (add-hook 'go-mode-hook '(lambda ()
+  (local-set-key (kbd "C-c C-c") 'go-run-buffer)
   (local-set-key (kbd "C-c i") 'go-goto-imports)
   (local-set-key (kbd "C-c C-r") 'go-remove-unused-imports)
   (local-set-key (kbd "C-c C-k") 'godoc)
