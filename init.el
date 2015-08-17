@@ -86,7 +86,7 @@
 (key-chord-define-global "jl" 'ace-jump-line-mode)
 (key-chord-define-global "uu" 'undo-tree-visualize)
 (key-chord-define-global "xf" 'helm-projectile-find-file)
-(key-chord-define-global "xg" 'helm-projectile-grep)
+(key-chord-define-global "xg" 'helm-git-grep)
 (key-chord-define-global "xh" 'helm-projectile)
 (key-chord-define-global "xn" 'helm-projectile-find-file-in-known-projects)
 (key-chord-define-global "xx" 'helm-M-x)
