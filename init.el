@@ -80,6 +80,7 @@
 ;;; Key chords
 (key-chord-mode 1)
 (setq key-chord-two-keys-delay 0.05)
+(key-chord-define-global "jd" 'ace-jump-to-definition)
 (key-chord-define-global "hh" 'helm-swoop)
 (key-chord-define-global "jj" 'ace-jump-word-mode)
 (key-chord-define-global "jk" 'ace-jump-char-mode)
@@ -200,3 +201,32 @@
   (setq sh-basic-offset 2)
   (setq sh-indentation 2)
   ))
+
+
+;;; ace-jump-to-definition
+(defvar ajd/jumping nil
+  "Internal flag for detecting if currently jumping to definition.")
+
+(defun ace-jump-to-definition ()
+  "Call `ace-jump-word-mode' and launch a  'jump-to-definition' function."
+  (interactive)
+  (let ((ace-jump-mode-scope 'window)))
+    (setq ajd/jumping t)
+    (call-interactively 'ace-jump-word-mode))
+
+(defun ajd/maybe-jump-start ()
+  "Push the mark when jumping to definition with `ace-jump-char-mode'."
+  (when ajd/jumping
+    (push-mark)))
+
+(defun ajd/maybe-jump-end ()
+  "Jump to definition after jumping with `ace-jump-word-mode.'."
+  (when ajd/jumping
+    (cond
+     ((string= major-mode "go-mode") (call-interactively 'godef-jump))
+     ((string= major-mode "emacs-lisp-mode") (call-interactively 'find-function))
+     (t (message (format "No jump-to-definition function defined for '%s'." major-mode)))))
+  (setq ajd/jumping nil))
+
+(add-hook 'ace-jump-mode-before-jump-hook #'ajd/maybe-jump-start)
+(add-hook 'ace-jump-mode-end-hook #'ajd/maybe-jump-end)
