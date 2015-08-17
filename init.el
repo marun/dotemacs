@@ -151,6 +151,7 @@
 (add-hook 'before-save-hook 'gofmt-before-save)
 (defun go-run-buffer()
   (interactive)
+  (save-buffer)
   (shell-command (concat "go run " (buffer-file-name))))
 (add-hook 'go-mode-hook '(lambda ()
   (local-set-key (kbd "C-c C-c") 'go-run-buffer)
@@ -162,6 +163,10 @@
   (company-mode)
   (add-to-list 'load-path
                (concat (getenv "GOPATH") "/src/github.com/dougm/goflymake"))
+  ;;; Customize compile command to run go build
+  (if (not (string-match "go" compile-command))
+      (set (make-local-variable 'compile-command)
+                      "go generate && go build -v && go test -v && go vet"))
   (require 'go-flymake)
   ))
 
