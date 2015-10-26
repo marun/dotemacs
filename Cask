@@ -4,6 +4,7 @@
 (depends-on "ace-jump-mode")
 (depends-on "ace-jump-zap")
 (depends-on "company-go")
+(depends-on "dockerfile-mode")
 (depends-on "elpy")
 (depends-on "flycheck-pyflakes")
 (depends-on "go-errcheck")
