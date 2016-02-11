@@ -27,3 +27,4 @@
 (depends-on "session")
 (depends-on "undo-tree")
 (depends-on "yaml-mode")
+(depends-on "yasnippet")
