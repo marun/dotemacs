@@ -167,7 +167,7 @@
   (if (not (string-match "go" compile-command))
       (set (make-local-variable 'compile-command)
                       "go generate && go build -v && go test -v && go vet"))
-  (require 'go-flymake)
+  (require 'go-projectile)
   ))
 
 
