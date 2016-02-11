@@ -26,5 +26,6 @@
 (depends-on "puppet-mode")
 (depends-on "session")
 (depends-on "undo-tree")
+(depends-on "with-editor")
 (depends-on "yaml-mode")
 (depends-on "yasnippet")
