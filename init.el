@@ -111,6 +111,7 @@
 (global-set-key (kbd "C-c s 1") 'helm-git-grep-at-point)
 (global-set-key (kbd "C-c s 2") 'helm-occur)
 (global-set-key (kbd "M-y") 'helm-show-kill-ring)
+(global-set-key (kbd "C-x C-f") 'helm-find-files)
 
 (setq helm-ff-skip-boring-files t)
 (setq helm-ff-file-name-history-use-recentf t)
