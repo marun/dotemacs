@@ -6,6 +6,7 @@
 (depends-on "company-go")
 (depends-on "dockerfile-mode")
 (depends-on "elpy")
+(depends-on "exec-path-from-shell")
 (depends-on "flycheck-pyflakes")
 (depends-on "go-errcheck")
 (depends-on "go-mode")
