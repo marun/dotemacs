@@ -2,6 +2,8 @@
 .session
 auto-save-list
 backups
+bookmarks
+projectile.cache
 projectile-bookmarks.eld
 projectile.cache
 saved-places
