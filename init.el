@@ -126,6 +126,11 @@
 (setq helm-scroll-amount 8)
 
 
+;;; NeoTree
+(require 'neotree)
+(global-set-key [f8] 'neotree-toggle)
+(setq neo-smart-open t)
+
 ;;; Projectile
 (projectile-global-mode)
 (helm-projectile-on)
@@ -134,6 +139,7 @@
       projectile-use-git-grep t
       projectile-mode-line '(:eval
                              (format " Prj[%s]" (projectile-project-name)))
+      projectile-switch-project-action 'neotree-projectile-action
       )
 
 

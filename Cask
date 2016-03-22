@@ -21,6 +21,7 @@
 (depends-on "magit")
 (depends-on "markdown-mode")
 (depends-on "monokai-theme")
+(depends-on "neotree")
 (depends-on "org")
 (depends-on "pallet")
 (depends-on "pbcopy")
