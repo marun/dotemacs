@@ -81,6 +81,7 @@
 (key-chord-mode 1)
 (setq key-chord-two-keys-delay 0.05)
 (key-chord-define-global "jd" 'ace-jump-to-definition)
+(key-chord-define-global "jg" 'ace-jump-to-git-grep)
 (key-chord-define-global "hh" 'helm-swoop)
 (key-chord-define-global "jj" 'ace-jump-word-mode)
 (key-chord-define-global "jk" 'ace-jump-char-mode)
@@ -236,3 +237,28 @@
 
 (add-hook 'ace-jump-mode-before-jump-hook #'ajd/maybe-jump-start)
 (add-hook 'ace-jump-mode-end-hook #'ajd/maybe-jump-end)
+
+
+;;; ace-jump-to-git-grep
+(defvar ajg/jumping nil
+  "Internal flag for detecting if currently jumping to definition.")
+
+(defun ace-jump-to-git-grep ()
+  "Call `ace-jump-word-mode' and launch a  'jump-to-git-grep' function."
+  (interactive)
+  (let ((ace-jump-mode-scope 'window)))
+    (setq ajg/jumping t)
+    (call-interactively 'ace-jump-word-mode))
+
+(defun ajg/maybe-jump-start ()
+  "Push the mark when jumping to git-grep with `ace-jump-char-mode'."
+  (when ajg/jumping
+    (push-mark)))
+
+(defun ajg/maybe-jump-end ()
+  "Jump to git-grep after jumping with `ace-jump-word-mode.'."
+  (when ajg/jumping (call-interactively 'helm-git-grep-at-point))
+  (setq ajg/jumping nil))
+
+(add-hook 'ace-jump-mode-before-jump-hook #'ajg/maybe-jump-start)
+(add-hook 'ace-jump-mode-end-hook #'ajg/maybe-jump-end)
