@@ -20,3 +20,18 @@ if ! which sw_vers &> /dev/null ; then
     pip_cmd="$pip_cmd --user"
 fi
 $pip_cmd jedi rope flake8 importmagic
+
+if which go &> /dev/null; then
+  tool_urls=(
+    'github.com/rogpeppe/godef'
+    'github.com/dougm/goflymake'
+    'github.com/kisielk/errcheck'
+    'github.com/nsf/gocode'
+    'github.com/tools/godep'
+    'golang.org/x/tools/cmd/cover'
+  )
+  export GOPATH="${HOME}/go"
+  for tool_url in ${tool_urls[@]}; do
+    go get "${tool_url}"
+  done
+fi
