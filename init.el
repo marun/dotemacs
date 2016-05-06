@@ -140,7 +140,6 @@
       projectile-use-git-grep t
       projectile-mode-line '(:eval
                              (format " Prj[%s]" (projectile-project-name)))
-      projectile-switch-project-action 'neotree-projectile-action
       )
 
 
