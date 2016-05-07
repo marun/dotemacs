@@ -156,6 +156,9 @@
 
 
 ;;; Go
+;;; TODO pick path based on projectile project of last golang buffer
+(setenv "GOPATH" "/home/dev/src/openshift:/home/dev/src/origin/Godeps/_workspace")
+;;(setenv "GOPATH" "/home/dev/src/kubernetes:/home/dev/src/kubernetes/Godeps/_workspace")
 (add-hook 'before-save-hook 'gofmt-before-save)
 (defun go-run-buffer()
   (interactive)
