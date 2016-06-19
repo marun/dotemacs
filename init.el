@@ -156,31 +156,37 @@
 
 
 ;;; Go
-;;; TODO pick path based on projectile project of last golang buffer
-(setenv "GOPATH" "/home/dev/src/openshift:/home/dev/src/origin/Godeps/_workspace")
-;;(setenv "GOPATH" "/home/dev/src/kubernetes:/home/dev/src/kubernetes/Godeps/_workspace")
-(add-hook 'before-save-hook 'gofmt-before-save)
 (defun go-run-buffer()
   (interactive)
   (save-buffer)
   (shell-command (concat "go run " (buffer-file-name))))
+(add-hook 'before-save-hook 'gofmt-before-save)
 (add-hook 'go-mode-hook '(lambda ()
   (local-set-key (kbd "C-c C-c") 'go-run-buffer)
   (local-set-key (kbd "C-c i") 'go-goto-imports)
   (local-set-key (kbd "C-c C-r") 'go-remove-unused-imports)
   (local-set-key (kbd "C-c C-k") 'godoc)
   (local-set-key (kbd "C-c C-f") 'gofmt)
+
+  ;;; TODO pick path based on projectile project of last golang buffer
+  (setenv "GOPATH" "/home/dev/src/openshift:/home/dev/src/origin/Godeps/_workspace")
+  ;;(setenv "GOPATH" "/home/dev/src/kubernetes:/home/dev/src/kubernetes/Godeps/_workspace")
+
+  (add-to-list 'load-path (concat (getenv "GOPATH")
+                                  "/src/github.com/dougm/goflymake"))
+  (add-to-list 'load-path (concat (getenv "GOPATH")
+                                  "/src/github.com/nsf/gocode/emacs-company"))
+
   (set (make-local-variable 'company-backends) '(company-go))
   (company-mode)
-  (add-to-list 'load-path
-               (concat (getenv "GOPATH") "/src/github.com/dougm/goflymake"))
+  (company-go)
+
   ;;; Customize compile command to run go build
   (if (not (string-match "go" compile-command))
       (set (make-local-variable 'compile-command)
                       "go generate && go build -v && go test -v && go vet"))
   (require 'go-projectile)
   ))
-
 
 ;;; Javascript
 (setq js-indent-level 2)
