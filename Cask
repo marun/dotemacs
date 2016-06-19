@@ -3,11 +3,13 @@
 
 (depends-on "ace-jump-mode")
 (depends-on "ace-jump-zap")
+(depends-on "auto-complete")
 (depends-on "company-go")
 (depends-on "dockerfile-mode")
 (depends-on "elpy")
 (depends-on "exec-path-from-shell")
 (depends-on "flycheck-pyflakes")
+(depends-on "go-autocomplete")
 (depends-on "go-errcheck")
 (depends-on "go-mode")
 (depends-on "go-projectile")
