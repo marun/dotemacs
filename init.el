@@ -176,7 +176,7 @@
   (local-set-key (kbd "C-c C-f") 'gofmt)
 
   ;;; TODO pick path based on projectile project of last golang buffer
-  (setenv "GOPATH" "/home/dev/src/openshift:/home/dev/src/origin/Godeps/_workspace")
+  (setenv "GOPATH" "/home/dev/src/openshift:/home/dev/src/openshift/github.com/openshift/origin/vendor")
   ;;(setenv "GOPATH" "/home/dev/src/kubernetes:/home/dev/src/kubernetes/Godeps/_workspace")
 
   (add-to-list 'load-path (concat (getenv "GOPATH")
