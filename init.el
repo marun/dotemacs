@@ -186,7 +186,6 @@
 
   (set (make-local-variable 'company-backends) '(company-go))
   (company-mode)
-  (company-go)
 
   ;;; Customize compile command to run go build
   (if (not (string-match "go" compile-command))
