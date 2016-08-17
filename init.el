@@ -177,7 +177,7 @@
 
   ;;; TODO pick path based on projectile project of last golang buffer
   (setenv "GOPATH" "/home/dev/src/openshift:/home/dev/src/openshift/github.com/openshift/origin/vendor")
-  ;;(setenv "GOPATH" "/home/dev/src/kubernetes:/home/dev/src/kubernetes/Godeps/_workspace")
+  ;; (setenv "GOPATH" "/home/dev/src/k8s:/home/dev/src/k8s/src/k8s.io/kubernetes/vendor")
 
   (add-to-list 'load-path (concat (getenv "GOPATH")
                                   "/src/github.com/dougm/goflymake"))
