@@ -9,6 +9,7 @@
 (depends-on "elpy")
 (depends-on "exec-path-from-shell")
 (depends-on "flycheck-pyflakes")
+(depends-on "git-link")
 (depends-on "go-autocomplete")
 (depends-on "go-errcheck")
 (depends-on "go-mode")
