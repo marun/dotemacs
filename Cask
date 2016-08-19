@@ -14,6 +14,7 @@
 (depends-on "go-errcheck")
 (depends-on "go-mode")
 (depends-on "go-projectile")
+(depends-on "gotest")
 (depends-on "helm")
 (depends-on "helm-flyspell")
 (depends-on "helm-git-grep")

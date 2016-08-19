@@ -21,7 +21,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (git-link yaml-mode undo-tree session puppet-mode pbcopy pallet neotree monokai-theme markdown-mode magit key-chord helm-themes helm-swoop helm-projectile helm-git-grep helm-flyspell go-projectile go-errcheck go-autocomplete flycheck-pyflakes exec-path-from-shell elpy dockerfile-mode company-go ace-jump-zap)))
+    (gotest git-link yaml-mode undo-tree session puppet-mode pbcopy pallet neotree monokai-theme markdown-mode magit key-chord helm-themes helm-swoop helm-projectile helm-git-grep helm-flyspell go-projectile go-errcheck go-autocomplete flycheck-pyflakes exec-path-from-shell elpy dockerfile-mode company-go ace-jump-zap)))
  '(session-use-package t nil (session)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -180,13 +180,11 @@
 
 
 ;;; Go
-(defun go-run-buffer()
-  (interactive)
-  (save-buffer)
-  (shell-command (concat "go run " (buffer-file-name))))
 (add-hook 'before-save-hook 'gofmt-before-save)
 (add-hook 'go-mode-hook '(lambda ()
-  (local-set-key (kbd "C-c C-c") 'go-run-buffer)
+  (local-set-key (kbd "C-c f") 'go-test-current-file)
+  (local-set-key (kbd "C-c t") 'go-test-current-test)
+  (local-set-key (kbd "C-c r") 'go-run)
   (local-set-key (kbd "C-c i") 'go-goto-imports)
   (local-set-key (kbd "C-c C-r") 'go-remove-unused-imports)
   (local-set-key (kbd "C-c C-k") 'godoc)
