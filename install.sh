@@ -30,6 +30,7 @@ if which go &> /dev/null; then
     'github.com/tools/godep'
     'golang.org/x/tools/cmd/cover'
     'golang.org/x/tools/cmd/gorename'
+    'golang.org/x/tools/cmd/guru'
   )
   export GOPATH="${HOME}/go"
   for tool_url in ${tool_urls[@]}; do
