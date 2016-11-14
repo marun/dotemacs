@@ -170,6 +170,8 @@
 ;;; Magit
 (setq magit-last-seen-setup-instructions "1.4.0")
 (global-set-key (kbd "C-c g") 'magit-status)
+(require 'magit-gh-pulls)
+(add-hook 'magit-mode-hook 'turn-on-magit-gh-pulls)
 
 
 ;;; Python
