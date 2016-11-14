@@ -183,6 +183,14 @@
 
 ;;; Go
 (add-hook 'before-save-hook 'gofmt-before-save)
+(add-hook 'buffer-list-update-hook '(lambda ()
+   ;; Customize gopath according to the project path
+   (cond ((string-prefix-p "/opt/src/openshift" buffer-file-name)
+          (setenv "GOPATH" "/opt/src/openshift:/opt/src/openshift/github.com/openshift/origin/vendor"))
+         ((string-prefix-p "/opt/src/k8s" buffer-file-name)
+          (setenv "GOPATH" "/opt/src/k8s:/opt/src/k8s/src/k8s.io/kubernetes/vendor"))
+         (t
+          (setenv "GOPATH" (concat (getenv "HOME") "/go"))))))
 (add-hook 'go-mode-hook '(lambda ()
   (local-set-key (kbd "C-c f") 'go-test-current-file)
   (local-set-key (kbd "C-c t") 'go-test-current-test)
@@ -191,10 +199,6 @@
   (local-set-key (kbd "C-c C-r") 'go-remove-unused-imports)
   (local-set-key (kbd "C-c C-k") 'godoc)
   (local-set-key (kbd "C-c C-f") 'gofmt)
-
-  ;;; TODO pick path based on projectile project of last golang buffer
-  (setenv "GOPATH" "/home/dev/src/openshift:/home/dev/src/openshift/github.com/openshift/origin/vendor")
-  ;; (setenv "GOPATH" "/home/dev/src/k8s:/home/dev/src/k8s/src/k8s.io/kubernetes/vendor")
 
   (add-to-list 'load-path (concat (getenv "GOPATH")
                                   "/src/github.com/dougm/goflymake"))
@@ -210,6 +214,7 @@
                       "go generate && go build -v && go test -v && go vet"))
   (require 'go-projectile)
   ))
+
 
 ;;; Javascript
 (setq js-indent-level 2)
