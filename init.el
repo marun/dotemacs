@@ -95,6 +95,10 @@
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'post-forward-angle-brackets)
 
+;; Prefer horizontal split
+(setq split-height-threshold 0)
+(setq split-width-threshold 0)
+
 
 ;;; Save last position in buffer
 (require 'saveplace)
