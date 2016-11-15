@@ -218,6 +218,8 @@
       (set (make-local-variable 'compile-command)
                       "go generate && go build -v && go test -v && go vet"))
   (require 'go-projectile)
+
+  (go-guru-hl-identifier-mode)
   ))
 
 
