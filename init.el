@@ -186,15 +186,31 @@
 
 ;;; Go
 (add-hook 'before-save-hook 'gofmt-before-save)
-(add-hook 'buffer-list-update-hook '(lambda ()
-   ;; Customize gopath according to the project path
-   (cond ((string-prefix-p "/opt/src/openshift" buffer-file-name)
-          (setenv "GOPATH" "/opt/src/openshift:/opt/src/openshift/github.com/openshift/origin/vendor"))
-         ((string-prefix-p "/opt/src/k8s" buffer-file-name)
-          (setenv "GOPATH" "/opt/src/k8s:/opt/src/k8s/src/k8s.io/kubernetes/vendor"))
-         (t
-          (setenv "GOPATH" (concat (getenv "HOME") "/go"))))))
-(add-hook 'go-mode-hook '(lambda ()
+
+;; Customize gopath and scope according to the path
+(setq maru-go-repo-conf '(
+      ("/opt/src/ose" "github.com/openshift/origin/cmd/openshift")
+      ("/opt/src/os" "github.com/openshift/origin/cmd/openshift")
+      ("/opt/src/k8s-ingress/src/k8s.io/contrib/ingress/controllers/nginx"
+       "k8s.io/contrib/ingress/controllers/nginx"
+       "/opt/src/k8s-ingress")
+      ("/opt/src/k8s" "k8s.io/kubernetes/cmd/hyperkube")
+      ("/")))
+(defun maru-buffer-list-update-hook ()
+  (catch 'found-match
+  (dolist (repo-conf maru-go-repo-conf)
+    (if (string-prefix-p (nth 0 repo-conf) buffer-file-name)
+        (progn
+          (if (nth 2 repo-conf)
+              (setenv "GOPATH" (nth 2 repo-conf))
+            (setenv "GOPATH" (nth 0 repo-conf)))
+          (if (string= "/" (nth 0 repo-conf))
+              (setq go-guru-scope (concat (getenv "HOME") "/go"))
+            (setq go-guru-scope (nth 1 repo-conf)))
+          (throw 'found-match "Found matching repo conf"))))))
+(add-hook 'buffer-list-update-hook 'maru-buffer-list-update-hook)
+
+(defun maru-go-mode-hook ()
   (local-set-key (kbd "C-c f") 'go-test-current-file)
   (local-set-key (kbd "C-c t") 'go-test-current-test)
   (local-set-key (kbd "C-c r") 'go-run)
@@ -218,7 +234,8 @@
   (require 'go-projectile)
 
   (go-guru-hl-identifier-mode)
-  ))
+  )
+(add-hook 'go-mode-hook 'maru-go-mode-hook)
 
 
 ;;; Javascript
