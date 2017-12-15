@@ -1,4 +1,4 @@
-# dot-emacs
+# dotemacs
 A minimal Emacs configuration for Python and Go development.
 
 After 14+ years of accumulating cruft in my .emacs file, I finally hit
