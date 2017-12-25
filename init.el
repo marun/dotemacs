@@ -104,6 +104,8 @@
 (require 'saveplace)
 (setq-default save-place t)
 (setq save-place-file (concat user-emacs-directory "saved-places"))
+;; Ignore files matching save-place-skip-check-regexp
+(setq-default save-place-save-skipped nil)
 
 
 ;;; Key chords
