@@ -188,25 +188,28 @@
 (add-hook 'before-save-hook 'gofmt-before-save)
 
 ;; Customize gopath and scope according to the path
+;; ([repo prefix], [go guru entrypoint], [gopath], [compile command])
 (setq maru-go-repo-conf '(
-      ("/opt/src/ose" "github.com/openshift/origin/cmd/openshift")
-      ("/opt/src/os" "github.com/openshift/origin/cmd/openshift")
-      ("/opt/src/k8s-ingress/src/k8s.io/contrib/ingress/controllers/nginx"
-       "k8s.io/contrib/ingress/controllers/nginx"
-       "/opt/src/k8s-ingress")
-      ("/opt/src/k8s" "k8s.io/kubernetes/cmd/hyperkube")
-      ("/")))
+      ("/opt/src/ose" "/opt/src/ose" "github.com/openshift/origin/cmd/openshift")
+      ("/opt/src/os" "/opt/src/os" "github.com/openshift/origin/cmd/openshift")
+      ("/opt/src/kk" "/opt/src/k8s:/opt/src/kk/src/k8s.io/kubernetes/staging" "k8s.io/kubernetes/cmd/hyperkube")
+      ("/opt/src/kf" "/opt/src/kf" "k8s.io/federation/cmd/kubefed" )
+      ("/opt/src/sc" "/opt/src/sc")
+      ("/opt/src/kt"  "/opt/src/kt")
+      ("/" "")))
 (defun maru-buffer-list-update-hook ()
   (catch 'found-match
   (dolist (repo-conf maru-go-repo-conf)
     (if (string-prefix-p (nth 0 repo-conf) buffer-file-name)
         (progn
-          (if (nth 2 repo-conf)
-              (setenv "GOPATH" (nth 2 repo-conf))
-            (setenv "GOPATH" (nth 0 repo-conf)))
           (if (string= "/" (nth 0 repo-conf))
               (setq go-guru-scope (concat (getenv "HOME") "/go"))
-            (setq go-guru-scope (nth 1 repo-conf)))
+            (setq go-guru-scope (nth 2 repo-conf)))
+          (setenv "GOPATH" (nth 1 repo-conf))
+          ;; Ignore errors caused by not being in a project
+          (ignore-errors
+            (set (make-local-variable 'compile-command)
+                 (format "cd %s && bazel build //prow/cmd/milestone-maintainer && bazel-bin/prow/cmd/milestone-maintainer/milestone-maintainer -github-token-file=./marun-oath -logtostderr -dry-run=false" (projectile-project-root))))
           (throw 'found-match "Found matching repo conf"))))))
 (add-hook 'buffer-list-update-hook 'maru-buffer-list-update-hook)
 
@@ -228,9 +231,12 @@
   (company-mode)
 
   ;;; Customize compile command to run go build
+  ;; (if (not (string-match "go" compile-command))
+  ;;     (set (make-local-variable 'compile-command)
+  ;;                     "go generate && go build -v && go test -v && go vet"))
   (if (not (string-match "go" compile-command))
       (set (make-local-variable 'compile-command)
-                      "go generate && go build -v && go test -v && go vet"))
+           (format "cd %s && PATH=/opt/src/k8s/src/k8s.io/kubernetes/third_party/etcd:${PATH} make test-integration WHAT=federation" (projectile-project-root))))
   (require 'go-projectile)
 
   (go-guru-hl-identifier-mode)
