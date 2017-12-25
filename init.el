@@ -274,6 +274,16 @@
   ))
 
 
+;;; Common function for triggering jump-to-definition
+(defun universal-jump-to-definition ()
+  (cond
+   ((string= major-mode "go-mode") (call-interactively 'godef-jump))
+   ((string= major-mode "emacs-lisp-mode") (call-interactively 'find-function))
+   ((string= major-mode "python-mode") (call-interactively 'elpy-goto-definition))
+   (t (message (format "No jump-to-definition function defined for '%s'." major-mode)))))
+(global-set-key (kbd "C-c C-j") 'universal-jump-to-definition)
+
+
 ;;; ace-jump-to-definition
 (defvar ajd/jumping nil
   "Internal flag for detecting if currently jumping to definition.")
@@ -293,10 +303,7 @@
 (defun ajd/maybe-jump-end ()
   "Jump to definition after jumping with `ace-jump-word-mode.'."
   (when ajd/jumping
-    (cond
-     ((string= major-mode "go-mode") (call-interactively 'godef-jump))
-     ((string= major-mode "emacs-lisp-mode") (call-interactively 'find-function))
-     (t (message (format "No jump-to-definition function defined for '%s'." major-mode)))))
+    (universal-jump-to-definition))
   (setq ajd/jumping nil))
 
 (add-hook 'ace-jump-mode-before-jump-hook #'ajd/maybe-jump-start)
