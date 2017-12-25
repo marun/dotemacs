@@ -21,19 +21,18 @@ if ! which sw_vers &> /dev/null ; then
 fi
 $pip_cmd jedi rope flake8 importmagic
 
-if which go &> /dev/null; then
-  tool_urls=(
-    'github.com/rogpeppe/godef'
-    'github.com/dougm/goflymake'
-    'github.com/kisielk/errcheck'
-    'github.com/nsf/gocode'
-    'github.com/tools/godep'
-    'golang.org/x/tools/cmd/cover'
-    'golang.org/x/tools/cmd/gorename'
-    'golang.org/x/tools/cmd/guru'
-  )
-  export GOPATH="${HOME}/go"
-  for tool_url in ${tool_urls[@]}; do
-    go get "${tool_url}"
-  done
-fi
+eval $(~/bin/gimme 1.9.2)
+tool_urls=(
+  'github.com/rogpeppe/godef'
+  'github.com/dougm/goflymake'
+  'github.com/kisielk/errcheck'
+  'github.com/nsf/gocode'
+  'github.com/tools/godep'
+  'golang.org/x/tools/cmd/cover'
+  'golang.org/x/tools/cmd/gorename'
+  'golang.org/x/tools/cmd/guru'
+)
+export GOPATH="${HOME}/go"
+for tool_url in ${tool_urls[@]}; do
+  go get "${tool_url}"
+done
