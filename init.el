@@ -190,14 +190,19 @@
 (add-hook 'before-save-hook 'gofmt-before-save)
 
 ;; Customize gopath and scope according to the path
-;; ([repo prefix], [go guru entrypoint], [gopath], [compile command])
+;; ([repo prefix], [gopath], [go guru entrypoint], [compile command])
 (setq maru-go-repo-conf '(
       ("/opt/src/ose" "/opt/src/ose" "github.com/openshift/origin/cmd/openshift")
       ("/opt/src/os" "/opt/src/os" "github.com/openshift/origin/cmd/openshift")
-      ("/opt/src/kk" "/opt/src/k8s:/opt/src/kk/src/k8s.io/kubernetes/staging" "k8s.io/kubernetes/cmd/hyperkube")
+      ("/opt/src/kk" "/opt/src/kk/src/k8s.io/kubernetes/staging:/opt/src/kk" "k8s.io/kubernetes/cmd/hyperkube")
       ("/opt/src/kf" "/opt/src/kf" "k8s.io/federation/cmd/kubefed" )
       ("/opt/src/sc" "/opt/src/sc")
       ("/opt/src/kt"  "/opt/src/kt")
+      ("/opt/src/mc"  "/opt/src/mc")
+      ("/opt/src/fn"  "/opt/src/fn")
+      ("/opt/src/tf"  "/opt/src/tf")
+      ("/opt/src/cr"  "/opt/src/cr")
+      ("/opt/src/ab"  "/opt/src/ab")
       ("/" "")))
 (defun maru-buffer-list-update-hook ()
   (catch 'found-match
