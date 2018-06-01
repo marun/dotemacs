@@ -9,7 +9,7 @@ if [ ! -d ~/.cask ]; then
 fi
 
 pushd $(dirname $0) > /dev/null
-  ~/.cask/bin/cask install
+  cask install
 popd > /dev/null
 
 # On OS X, homebrew pip will configure a local install path by
@@ -21,7 +21,7 @@ if ! which sw_vers &> /dev/null ; then
 fi
 $pip_cmd jedi rope flake8 importmagic
 
-eval $(~/bin/gimme 1.9.2)
+eval $(gimme 1.10.2)
 tool_urls=(
   'github.com/rogpeppe/godef'
   'github.com/dougm/goflymake'
@@ -34,5 +34,5 @@ tool_urls=(
 )
 export GOPATH="${HOME}/go"
 for tool_url in ${tool_urls[@]}; do
-  go get "${tool_url}"
+  go get -u "${tool_url}"
 done
