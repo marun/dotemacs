@@ -205,6 +205,8 @@
       ("/opt/src/tf"  "/opt/src/tf")
       ("/opt/src/cr"  "/opt/src/cr")
       ("/opt/src/ab"  "/opt/src/ab")
+      ("/opt/src/kb"  "/opt/src/kb")
+      ("/opt/src/op"  "/opt/src/op")
       ("/" "")))
 (defun maru-buffer-list-update-hook ()
   (catch 'found-match
