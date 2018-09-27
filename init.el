@@ -216,9 +216,6 @@
             (setq go-guru-scope (nth 2 repo-conf)))
           (setenv "GOPATH" (nth 1 repo-conf))
           ;; Ignore errors caused by not being in a project
-          (ignore-errors
-            (set (make-local-variable 'compile-command)
-                 (format "cd %s && bazel build //prow/cmd/milestone-maintainer && bazel-bin/prow/cmd/milestone-maintainer/milestone-maintainer -github-token-file=./marun-oath -logtostderr -dry-run=false" (projectile-project-root))))
           (throw 'found-match "Found matching repo conf"))))))
 (add-hook 'buffer-list-update-hook 'maru-buffer-list-update-hook)
 
