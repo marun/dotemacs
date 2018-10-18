@@ -203,6 +203,7 @@
       ("/opt/src/kt"  "/opt/src/kt")
       ("/opt/src/mc"  "/opt/src/mc")
       ("/opt/src/fn"  "/opt/src/fn")
+      ("/opt/src/testfn"  "/opt/src/testfn")
       ("/opt/src/tf"  "/opt/src/tf")
       ("/opt/src/cr"  "/opt/src/cr")
       ("/opt/src/ab"  "/opt/src/ab")
