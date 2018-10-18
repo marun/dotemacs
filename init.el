@@ -40,6 +40,7 @@
 (global-set-key (kbd "C-M-r") 'isearch-backward)
 (global-set-key (kbd "C-c x") 'compile)
 (global-set-key (kbd "C-c c") 'recompile)
+(global-set-key (kbd "C-c d") 'dlv)
 
 
 ;;; UX niceties
