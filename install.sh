@@ -8,10 +8,8 @@ if [ ! -d ~/.cask ]; then
   curl -fsSL https://raw.githubusercontent.com/cask/cask/master/go | python
 fi
 
-EMACS_DIR="$(dirname $0)"
-HOME_DIR="$(dirname "${EMACS_DIR}")"
-pushd "${EMACS_DIR}" > /dev/null
-  ${HOME_DIR}/.cask/bin/cask install
+pushd $(dirname $0) > /dev/null
+  ~/.cask/bin/cask install
 popd > /dev/null
 
 # On OS X, homebrew pip will configure a local install path by
@@ -34,7 +32,7 @@ tool_urls=(
   'golang.org/x/tools/cmd/gorename'
   'golang.org/x/tools/cmd/guru'
 )
-export GOPATH="${HOME}/go"
+export GOPATH=~/go
 for tool_url in ${tool_urls[@]}; do
   go get -u "${tool_url}"
 done
