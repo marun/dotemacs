@@ -23,7 +23,7 @@ if ! which sw_vers &> /dev/null ; then
 fi
 $pip_cmd jedi rope flake8 importmagic
 
-eval $(gimme 1.10.2)
+eval $(gimme 1.11.2)
 tool_urls=(
   'github.com/rogpeppe/godef'
   'github.com/dougm/goflymake'
