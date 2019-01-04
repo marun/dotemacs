@@ -8,8 +8,10 @@ if [ ! -d ~/.cask ]; then
   curl -fsSL https://raw.githubusercontent.com/cask/cask/master/go | python
 fi
 
-pushd $(dirname $0) > /dev/null
-  cask install
+EMACS_DIR="$(dirname $0)"
+HOME_DIR="$(dirname "${EMACS_DIR}")"
+pushd "${EMACS_DIR}" > /dev/null
+  ${HOME_DIR}/.cask/bin/cask install
 popd > /dev/null
 
 # On OS X, homebrew pip will configure a local install path by
