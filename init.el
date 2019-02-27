@@ -241,12 +241,9 @@
   (company-mode)
 
   ;;; Customize compile command to run go build
-  ;; (if (not (string-match "go" compile-command))
-  ;;     (set (make-local-variable 'compile-command)
-  ;;                     "go generate && go build -v && go test -v && go vet"))
   (if (not (string-match "go" compile-command))
       (set (make-local-variable 'compile-command)
-           (format "cd %s && PATH=/opt/src/k8s/src/k8s.io/kubernetes/third_party/etcd:${PATH} make test-integration WHAT=federation" (projectile-project-root))))
+                      "go generate && go build -v && go test -v && go vet"))
   (require 'go-projectile)
 
   (go-guru-hl-identifier-mode)
