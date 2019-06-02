@@ -193,35 +193,36 @@
 ;;; Go
 (add-hook 'before-save-hook 'gofmt-before-save)
 
-;; Customize gopath and scope according to the path
-;; ([repo prefix], [gopath], [go guru entrypoint], [compile command])
-(setq maru-go-repo-conf '(
-      ("/opt/src/ose" "/opt/src/ose" "github.com/openshift/origin/cmd/openshift")
-      ("/opt/src/os" "/opt/src/os" "github.com/openshift/origin/cmd/openshift")
-      ("/opt/src/kk" "/opt/src/kk/src/k8s.io/kubernetes/staging:/opt/src/kk" "k8s.io/kubernetes/cmd/hyperkube")
-      ("/opt/src/kf" "/opt/src/kf")
-      ("/opt/src/sc" "/opt/src/sc")
-      ("/opt/src/kt"  "/opt/src/kt")
-      ("/opt/src/mc"  "/opt/src/mc")
-      ("/opt/src/testfn"  "/opt/src/testfn")
-      ("/opt/src/tf"  "/opt/src/tf")
-      ("/opt/src/cr"  "/opt/src/cr")
-      ("/opt/src/ab"  "/opt/src/ab")
-      ("/opt/src/kb"  "/opt/src/kb")
-      ("/opt/src/op"  "/opt/src/op")
-      ("/" "")))
-(defun maru-buffer-list-update-hook ()
-  (catch 'found-match
-  (dolist (repo-conf maru-go-repo-conf)
-    (if (string-prefix-p (nth 0 repo-conf) buffer-file-name)
-        (progn
-          (if (string= "/" (nth 0 repo-conf))
-              (setq go-guru-scope (concat (getenv "HOME") "/go"))
-            (setq go-guru-scope (nth 2 repo-conf)))
-          (setenv "GOPATH" (nth 1 repo-conf))
-          ;; Ignore errors caused by not being in a project
-          (throw 'found-match "Found matching repo conf"))))))
-(add-hook 'buffer-list-update-hook 'maru-buffer-list-update-hook)
+
+;; Given a buffer name, set the appropriate GOPATH.  If the buffer
+;; name indicates a go project (i.e. <path>/src/<project id>/src), use
+;; the root of the project (i.e. <path>/src/<project id>).  Otherwise,
+;; use '$HOME/go'.
+(defun maru-set-gopath-from-buffer-name (buffer-name)
+  (let ((path-entries (split-string buffer-name "/"))
+        (gopath "")
+        (i 0))
+    (progn
+      (while (and
+              (string= "" gopath)
+              (<= i (length path-entries)))
+        ;; If "src" is found
+        (if (string= "src" (nth i path-entries))
+            ;; If the nth + 2 element is also "src"
+            (if (and (<= (+ i 2) (length path-entries))
+                     (string= "src" (nth (+ i 2) path-entries)))
+                ;; Set the gopath to the nth + 1 element
+                (setq gopath (string-join (seq-take path-entries (+ i 2)) "/"))))
+        (setq i (1+ i)))
+      (if (string= "" gopath )
+          (setq gopath (concat (getenv "HOME") "/go")))
+      (setenv "GOPATH" gopath))))
+
+(defun maru-go-buffer-list-update-hook ()
+  (if (not (null buffer-file-name))
+      (maru-set-gopath-from-buffer-name buffer-file-name)))
+
+(add-hook 'buffer-list-update-hook 'maru-go-buffer-list-update-hook)
 
 (defun maru-go-mode-hook ()
   (local-set-key (kbd "C-c f") 'go-test-current-file)
