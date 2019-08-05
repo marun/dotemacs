@@ -28,7 +28,7 @@ if [ ! -f ~/bin/gimme ]; then
 fi
 
 # Install golang dev tools
-eval $(~/bin/gimme 1.12.5)
+eval $(~/bin/gimme 1.12.7)
 tool_urls=(
   'github.com/derekparker/delve/cmd/dlv'
   'github.com/dougm/goflymake'
