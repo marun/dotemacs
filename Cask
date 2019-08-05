@@ -62,7 +62,6 @@
 (depends-on "session")
 (depends-on "shut-up")
 (depends-on "transient")
-(depends-on "undo-tree")
 (depends-on "with-editor")
 (depends-on "yaml-mode")
 (depends-on "yasnippet")

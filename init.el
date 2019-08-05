@@ -21,7 +21,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (transient ace-jump-mode ghub logito pkg-info popup shut-up go-dlv epl marshal pcache pyvenv async auto-complete cask company dash f find-file-in-project flycheck gh git-commit go-eldoc go-guru go-mode go-rename helm helm-core highlight-indentation ht ivy magit-popup package-build projectile s with-editor yasnippet gotest git-link yaml-mode undo-tree session puppet-mode pbcopy pallet neotree monokai-theme markdown-mode magit key-chord helm-themes helm-swoop helm-projectile helm-git-grep helm-flyspell go-projectile go-errcheck go-autocomplete flycheck-pyflakes exec-path-from-shell elpy dockerfile-mode company-go ace-jump-zap)))
+    (transient ace-jump-mode ghub logito pkg-info popup shut-up go-dlv epl marshal pcache pyvenv async auto-complete cask company dash f find-file-in-project flycheck gh git-commit go-eldoc go-guru go-mode go-rename helm helm-core highlight-indentation ht ivy magit-popup package-build projectile s with-editor yasnippet gotest git-link yaml-mode session puppet-mode pbcopy pallet neotree monokai-theme markdown-mode magit key-chord helm-themes helm-swoop helm-projectile helm-git-grep helm-flyspell go-projectile go-errcheck go-autocomplete flycheck-pyflakes exec-path-from-shell elpy dockerfile-mode company-go ace-jump-zap)))
  '(projectile-enable-caching t)
  '(session-use-package t nil (session)))
 (custom-set-faces
@@ -78,9 +78,6 @@
 ;; Show matching pairs of special characters
 (show-paren-mode 1)
 
-;; Visualize the undo tree
-(undo-tree-mode 1)
-
 ;; Save history across sessions
 (add-hook 'after-init-hook 'session-initialize)
 
@@ -120,7 +117,6 @@
 (key-chord-define-global "jj" 'ace-jump-word-mode)
 (key-chord-define-global "jk" 'ace-jump-char-mode)
 (key-chord-define-global "jl" 'ace-jump-line-mode)
-(key-chord-define-global "uu" 'undo-tree-visualize)
 (key-chord-define-global "xf" 'helm-projectile-find-file)
 (key-chord-define-global "xg" 'helm-git-grep-at-point)
 (key-chord-define-global "xh" 'helm-projectile)
