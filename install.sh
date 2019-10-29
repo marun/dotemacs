@@ -4,6 +4,23 @@
 
 set -e
 
+# Install emacs 26.3 from source to workaround broken 26.2 in fedora 30 and 31.
+if [ "`uname`" != 'Darwin' ]; then
+  pushd /tmp > /dev/null
+    curl -LO http://mirrors.kernel.org/gnu/emacs/emacs-26.3.tar.gz
+     tar xzf emacs-26.3.tar.gz
+     cd emacs-26.3
+     ./configure --prefix="${HOME}/emacs" --bindir="${HOME}/bin"
+     make
+     make install
+  popd
+  rm -rf /tmp/emacs-26.3*
+  # Ensure emacs binary is in the path
+  export PATH=${PATH}:${HOME}/bin
+fi
+
+# Install cask and language dependencies.
+
 if [ ! -d ~/.cask ]; then
   curl -fsSL https://raw.githubusercontent.com/cask/cask/master/go | python3
 fi
@@ -16,7 +33,7 @@ popd > /dev/null
 # default, and passing --user on the commandline will cause an error.
 pip_cmd="pip install --upgrade"
 # For linux distros, --user is necessary to install as a non-privileged user.
-if ! which sw_vers &> /dev/null ; then
+if [ "`uname`" != 'Darwin' ]; then
   pip_cmd="$pip_cmd --user"
 fi
 $pip_cmd jedi rope flake8 importmagic
