@@ -5,11 +5,11 @@
 set -e
 
 if [ ! -d ~/.cask ]; then
-  curl -fsSL https://raw.githubusercontent.com/cask/cask/master/go | python
+  curl -fsSL https://raw.githubusercontent.com/cask/cask/master/go | python3
 fi
 
 pushd $(dirname $0) > /dev/null
-  ~/.cask/bin/cask install
+  python3 ~/.cask/bin/cask install
 popd > /dev/null
 
 # On OS X, homebrew pip will configure a local install path by
