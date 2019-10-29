@@ -29,6 +29,7 @@
 (depends-on "go-errcheck")
 (depends-on "go-guru")
 (depends-on "go-mode")
+(depends-on "go-playground")
 (depends-on "go-projectile")
 (depends-on "go-rename")
 (depends-on "go-snippets")
