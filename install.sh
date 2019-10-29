@@ -48,7 +48,6 @@ fi
 eval $(~/bin/gimme 1.13.1)
 tool_urls=(
   'github.com/derekparker/delve/cmd/dlv'
-  'github.com/dougm/goflymake'
   'github.com/kisielk/errcheck'
   'github.com/nsf/gocode'
   'github.com/rogpeppe/godef'

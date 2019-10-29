@@ -21,7 +21,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (transient ace-jump-mode ghub logito pkg-info popup shut-up go-dlv epl marshal pcache pyvenv async auto-complete cask company dash f find-file-in-project flycheck gh git-commit go-eldoc go-guru go-mode go-rename helm helm-core highlight-indentation ht ivy magit-popup package-build projectile s with-editor yasnippet gotest git-link yaml-mode session puppet-mode pbcopy pallet neotree monokai-theme markdown-mode magit key-chord helm-themes helm-swoop helm-projectile helm-git-grep helm-flyspell go-projectile go-errcheck go-autocomplete flycheck-pyflakes exec-path-from-shell elpy dockerfile-mode company-go ace-jump-zap)))
+    (lsp-ui helm-company company-lsp lsp-mode flycheck-golangci-lint go-snippets transient ace-jump-mode ghub logito pkg-info popup shut-up go-dlv epl marshal pcache pyvenv async auto-complete cask company dash f find-file-in-project flycheck gh git-commit go-eldoc go-mode go-rename helm helm-core highlight-indentation ht ivy magit-popup package-build projectile s with-editor yasnippet gotest git-link yaml-mode session puppet-mode pbcopy pallet neotree monokai-theme markdown-mode magit key-chord helm-themes helm-swoop helm-projectile helm-git-grep helm-flyspell go-projectile go-errcheck go-autocomplete flycheck-pyflakes exec-path-from-shell elpy dockerfile-mode company-go ace-jump-zap)))
  '(projectile-enable-caching t)
  '(session-use-package t nil (session)))
 (custom-set-faces
@@ -186,6 +186,12 @@
 (add-hook 'elpy-mode-hook 'flycheck-mode)
 
 
+;;; LSP
+(require 'lsp-mode)
+(require 'lsp-ui)
+(add-hook 'lsp-mode-hook 'lsp-ui-mode)
+
+
 ;;; Go
 (add-hook 'before-save-hook 'gofmt-before-save)
 
@@ -224,26 +230,20 @@
   (local-set-key (kbd "C-c f") 'go-test-current-file)
   (local-set-key (kbd "C-c t") 'go-test-current-test)
   (local-set-key (kbd "C-c r") 'go-run)
-  (local-set-key (kbd "C-c i") 'go-goto-imports)
   (local-set-key (kbd "C-c C-r") 'go-remove-unused-imports)
   (local-set-key (kbd "C-c C-k") 'godoc)
-  (local-set-key (kbd "C-c C-f") 'gofmt)
+  (local-set-key (kbd "C-c C-b") 'lsp-format-buffer)
 
-  (add-to-list 'load-path (concat (getenv "GOPATH")
-                                  "/src/github.com/dougm/goflymake"))
-  (add-to-list 'load-path (concat (getenv "GOPATH")
-                                  "/src/github.com/nsf/gocode/emacs-company"))
-
-  (set (make-local-variable 'company-backends) '(company-go))
-  (company-mode)
+  (flycheck-mode)
+  (lsp-deferred)
 
   ;;; Customize compile command to run go build
   (if (not (string-match "go" compile-command))
       (set (make-local-variable 'compile-command)
-                      "go generate && go build -v && go test -v && go vet"))
-  (require 'go-projectile)
+           "go build -v"))
 
   (go-guru-hl-identifier-mode)
+  (require 'go-projectile)
   )
 (add-hook 'go-mode-hook 'maru-go-mode-hook)
 
