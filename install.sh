@@ -47,7 +47,7 @@ fi
 # Install golang dev tools
 eval $(~/bin/gimme 1.13.1)
 tool_urls=(
-  'github.com/derekparker/delve/cmd/dlv'
+  'github.com/go-delve/delve/cmd/dlv'
   'github.com/kisielk/errcheck'
   'github.com/nsf/gocode'
   'github.com/rogpeppe/godef'
@@ -55,6 +55,7 @@ tool_urls=(
   'golang.org/x/tools/cmd/cover'
   'golang.org/x/tools/cmd/gorename'
   'golang.org/x/tools/cmd/guru'
+  'golang.org/x/tools/gopls'
 )
 export GOPATH=~/go
 for tool_url in ${tool_urls[@]}; do
