@@ -48,6 +48,7 @@
 (depends-on "key-chord")
 (depends-on "logito")
 (depends-on "lsp-mode")
+(depends-on "lsp-python-ms")
 (depends-on "lsp-ui")
 (depends-on "magit")
 (depends-on "magit-popup")
