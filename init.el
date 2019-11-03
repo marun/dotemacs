@@ -190,6 +190,8 @@
 (require 'lsp-mode)
 (require 'lsp-ui)
 (add-hook 'lsp-mode-hook 'lsp-ui-mode)
+(define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
+(define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
 
 
 ;;; Go
@@ -230,12 +232,8 @@
   (local-set-key (kbd "C-c f") 'go-test-current-file)
   (local-set-key (kbd "C-c t") 'go-test-current-test)
   (local-set-key (kbd "C-c r") 'go-run)
-  (local-set-key (kbd "C-c C-r") 'go-remove-unused-imports)
-  (local-set-key (kbd "C-c C-k") 'godoc)
-  (local-set-key (kbd "C-c C-b") 'lsp-format-buffer)
+  (local-set-key (kbd "C-c C-o") 'lsp-organize-imports)
 
-  (flycheck-mode)
-  (lsp-deferred)
 
   ;;; Customize compile command to run go build
   (if (not (string-match "go" compile-command))
@@ -246,6 +244,8 @@
   (require 'go-projectile)
   )
 (add-hook 'go-mode-hook 'maru-go-mode-hook)
+(add-hook 'go-mode-hook 'flycheck-mode)
+(add-hook 'go-mode-hook 'lsp-deferred)
 
 
 ;;; Javascript
@@ -281,7 +281,7 @@
 ;;; Common function for triggering jump-to-definition
 (defun universal-jump-to-definition ()
   (cond
-   ((string= major-mode "go-mode") (call-interactively 'godef-jump))
+   ((string= major-mode "go-mode") (call-interactively 'lsp-find-definition))
    ((string= major-mode "emacs-lisp-mode") (call-interactively 'find-function))
    ((string= major-mode "python-mode") (call-interactively 'elpy-goto-definition))
    (t (message (format "No jump-to-definition function defined for '%s'." major-mode)))))
