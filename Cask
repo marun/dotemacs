@@ -69,6 +69,7 @@
 (depends-on "session")
 (depends-on "shut-up")
 (depends-on "transient")
+(depends-on "use-package")
 (depends-on "with-editor")
 (depends-on "yaml-mode")
 (depends-on "yasnippet")
