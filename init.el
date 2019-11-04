@@ -180,11 +180,17 @@
 
 
 ;;; LSP
-(require 'lsp-mode)
-(require 'lsp-ui)
-(add-hook 'lsp-mode-hook 'lsp-ui-mode)
-(define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
-(define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
+(use-package lsp-mode
+  :hook
+  (go-mode . lsp)
+  (python-mode . lsp)
+  :config
+  (setq lsp-prefer-flymake :none)
+  (setq lsp-eldoc-render-all nil)
+  (setq lsp-ui-doc-enable nil)
+  :commands lsp)
+(use-package company-lsp :commands company-lsp)
+(use-package helm-lsp :commands helm-lsp-workspace-symbol)
 
 
 ;;; Python
@@ -248,8 +254,6 @@
   (require 'go-projectile)
   )
 (add-hook 'go-mode-hook 'maru-go-mode-hook)
-(add-hook 'go-mode-hook 'flycheck-mode)
-(add-hook 'go-mode-hook 'lsp-deferred)
 
 
 ;;; Javascript
