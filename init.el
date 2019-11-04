@@ -244,6 +244,8 @@
   (local-set-key (kbd "C-c r") 'go-run)
   (local-set-key (kbd "C-c C-o") 'lsp-organize-imports)
 
+  ;; Prefer universal-jump-to-definition
+  (local-unset-key (kbd "C-c C-j"))
 
   ;;; Customize compile command to run go build
   (if (not (string-match "go" compile-command))
