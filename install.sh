@@ -29,15 +29,6 @@ pushd $(dirname $0) > /dev/null
   python3 ~/.cask/bin/cask install
 popd > /dev/null
 
-# On OS X, homebrew pip will configure a local install path by
-# default, and passing --user on the commandline will cause an error.
-pip_cmd="pip install --upgrade"
-# For linux distros, --user is necessary to install as a non-privileged user.
-if [ "`uname`" != 'Darwin' ]; then
-  pip_cmd="$pip_cmd --user"
-fi
-$pip_cmd jedi rope flake8 importmagic
-
 # Install gimme
 if [ ! -f ~/bin/gimme ]; then
   curl -sL -o ~/bin/gimme https://raw.githubusercontent.com/travis-ci/gimme/5256888df1e749fdb6acabc8f9e07a52f05b9f28/gimme

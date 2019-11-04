@@ -179,13 +179,6 @@
 (global-set-key (kbd "C-c g") 'magit-status)
 
 
-;;; Python
-(elpy-enable)
-;; Elpy should use flycheck instead of flymake
-(setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
-(add-hook 'elpy-mode-hook 'flycheck-mode)
-
-
 ;;; LSP
 (require 'lsp-mode)
 (require 'lsp-ui)
@@ -193,6 +186,17 @@
 (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
 (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
 
+
+;;; Python
+(use-package lsp-python-ms
+  :ensure t
+  :hook (python-mode . (lambda ()
+                          (require 'lsp-python-ms)
+                          (lsp-deferred)
+                          ;; This key binding is used globally for jump-to-definition
+                          (local-unset-key (kbd "C-c C-j"))
+                          (local-set-key (kbd "C-c r") (kbd "C-u C-c C-c") ))))
+(setq python-shell-interpreter "python3")
 
 ;;; Go
 (add-hook 'before-save-hook 'gofmt-before-save)
@@ -283,7 +287,7 @@
   (cond
    ((string= major-mode "go-mode") (call-interactively 'lsp-find-definition))
    ((string= major-mode "emacs-lisp-mode") (call-interactively 'find-function))
-   ((string= major-mode "python-mode") (call-interactively 'elpy-goto-definition))
+   ((string= major-mode "python-mode") (call-interactively 'lsp-find-definition))
    (t (message (format "No jump-to-definition function defined for '%s'." major-mode)))))
 (global-set-key (kbd "C-c C-j") 'universal-jump-to-definition)
 
