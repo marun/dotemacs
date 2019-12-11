@@ -207,6 +207,8 @@
 ;;; Go
 (add-hook 'before-save-hook 'gofmt-before-save)
 
+;; Default to using vendoring until go1.14 enables detection
+(setenv "GOFLAGS" "-mod=vendor")
 
 ;; Given a buffer name, set the appropriate GOPATH.  If the buffer
 ;; name indicates a go project (i.e. <path>/src/<project id>/src), use
