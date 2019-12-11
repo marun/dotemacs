@@ -243,7 +243,7 @@
 (defun maru-go-mode-hook ()
   (local-set-key (kbd "C-c f") 'go-test-current-file)
   (local-set-key (kbd "C-c t") 'go-test-current-test)
-  (local-set-key (kbd "C-c r") 'go-run)
+  (local-set-key (kbd "C-c r") 'lsp-ui-peek-find-references)
   (local-set-key (kbd "C-c C-o") 'lsp-organize-imports)
 
   ;; Prefer universal-jump-to-definition
