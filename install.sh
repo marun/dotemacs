@@ -4,17 +4,18 @@
 
 set -e
 
-# Install emacs 26.3 from source to workaround broken 26.2 in fedora 30 and 31.
-if [ "`uname`" != 'Darwin' ]; then
-  pushd /tmp > /dev/null
-    curl -LO http://mirrors.kernel.org/gnu/emacs/emacs-26.3.tar.gz
-     tar xzf emacs-26.3.tar.gz
-     cd emacs-26.3
-     ./configure --prefix="${HOME}/emacs" --bindir="${HOME}/bin"
-     make
-     make install
+# Install emacs 27 from source on linux to ensure a json parser written in c
+EMACS="$(which emacs 2> /dev/null)"
+if [[ "`uname`" != 'Darwin' && -z "${EMACS}" ]]; then
+  mkdir -p "${HOME}/src"
+  pushd "${HOME}/src" > /dev/null
+    git clone -b master git://git.sv.gnu.org/emacs.git
+    cd emacs
+    ./autoconf.sh
+    ./configure --prefix="${HOME}/emacs" --bindir="${HOME}/bin"
+    make
+    make install
   popd
-  rm -rf /tmp/emacs-26.3*
   # Ensure emacs binary is in the path
   export PATH=${PATH}:${HOME}/bin
 fi
