@@ -185,12 +185,12 @@
   (go-mode . lsp)
   (python-mode . lsp)
   :config
-  (setq lsp-prefer-flymake :none)
   (setq lsp-eldoc-render-all nil)
   (setq lsp-ui-doc-enable nil)
   :commands lsp)
 (use-package company-lsp :commands company-lsp)
 (use-package helm-lsp :commands helm-lsp-workspace-symbol)
+(global-set-key (kbd "C-c C-e") 'flymake-goto-next-error)
 
 
 ;;; yasnippet
