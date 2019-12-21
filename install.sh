@@ -5,18 +5,18 @@
 set -e
 
 # Install emacs 27 from source on linux to ensure a json parser written in c
-EMACS="$(which emacs 2> /dev/null)"
-if [[ "`uname`" != 'Darwin' && -z "${EMACS}" ]]; then
+if [[ "`uname`" != 'Darwin' ]]; then
   mkdir -p "${HOME}/src"
   pushd "${HOME}/src" > /dev/null
     git clone -b master git://git.sv.gnu.org/emacs.git
-    cd emacs
-    ./autoconf.sh
-    ./configure --prefix="${HOME}/emacs" --bindir="${HOME}/bin"
-    make
-    make install
+    pushd emacs > /dev/null
+      ./autogen.sh
+      ./configure --prefix="${HOME}/emacs" --bindir="${HOME}/bin"
+      make
+      make install
+    popd
   popd
-  # Ensure emacs binary is in the path
+  # Ensure emacs binary is in the path for the install
   export PATH=${PATH}:${HOME}/bin
 fi
 
