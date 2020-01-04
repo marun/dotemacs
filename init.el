@@ -161,6 +161,7 @@
 (global-set-key [f8] 'neotree-toggle)
 (setq neo-smart-open t)
 
+
 ;;; Projectile
 (projectile-global-mode)
 (helm-projectile-on)
@@ -209,6 +210,7 @@
                           (local-unset-key (kbd "C-c C-j"))
                           (local-set-key (kbd "C-c r") (kbd "C-u C-c C-c") ))))
 (setq python-shell-interpreter "python3")
+
 
 ;;; Go
 (add-hook 'before-save-hook 'gofmt-before-save)
