@@ -206,6 +206,7 @@
   :hook (python-mode . (lambda ()
                           (require 'lsp-python-ms)
                           (lsp-deferred)
+                          (local-set-key (kbd "C-c C-t") 'pytest-one)
                           ;; This key binding is used globally for jump-to-definition
                           (local-unset-key (kbd "C-c C-j"))
                           (local-set-key (kbd "C-c r") (kbd "C-u C-c C-c") ))))
