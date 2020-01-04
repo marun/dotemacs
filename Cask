@@ -37,6 +37,7 @@
 (depends-on "go-snippets")
 (depends-on "gotest")
 (depends-on "helm")
+(depends-on "helm-c-yasnippet")
 (depends-on "helm-company")
 (depends-on "helm-core")
 (depends-on "helm-flyspell")
@@ -77,3 +78,4 @@
 (depends-on "with-editor")
 (depends-on "yaml-mode")
 (depends-on "yasnippet")
+(depends-on "yasnippet-snippets")
