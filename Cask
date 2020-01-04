@@ -68,6 +68,7 @@
 (depends-on "popup")
 (depends-on "projectile")
 (depends-on "puppet-mode")
+(depends-on "pytest")
 (depends-on "pyvenv")
 (depends-on "s")
 (depends-on "session")
