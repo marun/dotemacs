@@ -219,6 +219,9 @@
 ;; Default to using vendoring until go1.14 enables detection
 (setenv "GOFLAGS" "-mod=vendor")
 
+;; Provide a reasonable default for kubeconfig
+(setenv "KUBECONFIG" "~/.kube/default-kubeconfig")
+
 ;; Given a buffer name, set the appropriate GOPATH.  If the buffer
 ;; name indicates a go project (i.e. <path>/src/<project id>/src), use
 ;; the root of the project (i.e. <path>/src/<project id>).  Otherwise,
