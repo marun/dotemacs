@@ -187,6 +187,7 @@
   :config
   (setq lsp-eldoc-render-all nil)
   (setq lsp-ui-doc-enable nil)
+  (setq lsp-enable-file-watchers nil)
   :commands lsp)
 (use-package company-lsp :commands company-lsp)
 (use-package helm-lsp :commands helm-lsp-workspace-symbol)
