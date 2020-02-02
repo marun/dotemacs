@@ -10,6 +10,7 @@ if [[ "`uname`" != 'Darwin' ]]; then
   pushd "${HOME}/src" > /dev/null
     git clone -b master git://git.sv.gnu.org/emacs.git
     pushd emacs > /dev/null
+      git co --track origin/emacs-27
       ./autogen.sh
       ./configure --prefix="${HOME}/emacs" --bindir="${HOME}/bin"
       make
