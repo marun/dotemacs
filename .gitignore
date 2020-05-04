@@ -6,6 +6,7 @@ auto-save-list
 backups
 bookmarks
 elpa
+eshell
 mspyls
 projectile.cache
 projectile-bookmarks.eld
