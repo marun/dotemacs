@@ -162,6 +162,19 @@
 (setq neo-smart-open t)
 
 
+;;; org-mode
+
+; Workaround iterm2 shell handling
+(define-key input-decode-map "\e[1;10A" [M-S-up])
+(define-key input-decode-map "\e[1;10B" [M-S-down])
+(define-key input-decode-map "\e[1;10C" [M-S-right])
+(define-key input-decode-map "\e[1;10D" [M-S-left])
+(define-key input-decode-map "\e[1;9A" [M-up])
+(define-key input-decode-map "\e[1;9B" [M-down])
+(define-key input-decode-map "\e[1;9C" [M-right])
+(define-key input-decode-map "\e[1;9D" [M-left])
+
+
 ;;; Projectile
 (projectile-global-mode)
 (helm-projectile-on)
