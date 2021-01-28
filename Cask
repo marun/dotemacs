@@ -24,6 +24,7 @@
 (depends-on "flycheck")
 (depends-on "flycheck-golangci-lint")
 (depends-on "flycheck-pyflakes")
+(depends-on "forge")
 (depends-on "gh")
 (depends-on "ghub")
 (depends-on "git-commit")
