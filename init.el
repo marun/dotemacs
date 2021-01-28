@@ -23,7 +23,7 @@
    [default default default italic underline success warning error])
  '(custom-enabled-themes '(tsdh-light))
  '(package-selected-packages
-   '(forge helm-git-grep lsp-treemacs pytest yasnippet-snippets helm-c-yasnippet bind-key dash-functional treepy lsp-python-ms use-package go-playground lsp-ui helm-company company-lsp lsp-mode flycheck-golangci-lint go-snippets transient ace-jump-mode ghub logito pkg-info popup go-dlv epl marshal pcache pyvenv async auto-complete cask company dash f find-file-in-project flycheck gh git-commit go-eldoc go-mode go-rename helm helm-core highlight-indentation ht ivy magit-popup package-build projectile s with-editor yasnippet gotest git-link yaml-mode session puppet-mode pbcopy pallet neotree monokai-theme markdown-mode magit key-chord helm-themes helm-swoop helm-projectile helm-flyspell go-projectile go-errcheck go-autocomplete flycheck-pyflakes exec-path-from-shell elpy dockerfile-mode company-go ace-jump-zap))
+   '(helm-rg forge helm-git-grep lsp-treemacs pytest yasnippet-snippets helm-c-yasnippet bind-key dash-functional treepy lsp-python-ms use-package go-playground lsp-ui helm-company company-lsp lsp-mode flycheck-golangci-lint go-snippets transient ace-jump-mode ghub logito pkg-info popup go-dlv epl marshal pcache pyvenv async auto-complete cask company dash f find-file-in-project flycheck gh git-commit go-eldoc go-mode go-rename helm helm-core highlight-indentation ht ivy magit-popup package-build projectile s with-editor yasnippet gotest git-link yaml-mode session puppet-mode pbcopy pallet neotree monokai-theme markdown-mode magit key-chord helm-themes helm-swoop helm-projectile helm-flyspell go-projectile go-errcheck go-autocomplete flycheck-pyflakes exec-path-from-shell elpy dockerfile-mode company-go ace-jump-zap))
  '(projectile-enable-caching t)
  '(session-use-package t nil (session)))
 (custom-set-faces
@@ -113,14 +113,14 @@
 ;;; Key chords
 (key-chord-mode 1)
 (setq key-chord-two-keys-delay 0.05)
-(key-chord-define-global "jd" 'ace-jump-to-definition)
-(key-chord-define-global "jg" 'ace-jump-to-git-grep)
 (key-chord-define-global "hh" 'helm-swoop)
+(key-chord-define-global "jd" 'ace-jump-to-definition)
+(key-chord-define-global "jg" 'ace-jump-to-helm-rg)
 (key-chord-define-global "jj" 'ace-jump-word-mode)
 (key-chord-define-global "jk" 'ace-jump-char-mode)
 (key-chord-define-global "jl" 'ace-jump-line-mode)
 (key-chord-define-global "xf" 'helm-projectile-find-file)
-(key-chord-define-global "xg" 'helm-git-grep-at-point)
+(key-chord-define-global "xg" 'helm-rg)
 (key-chord-define-global "xh" 'helm-projectile)
 (key-chord-define-global "xn" 'helm-projectile-find-file-in-known-projects)
 (key-chord-define-global "xx" 'helm-M-x)
@@ -358,25 +358,25 @@
 (add-hook 'ace-jump-mode-end-hook #'ajd/maybe-jump-end)
 
 
-;;; ace-jump-to-git-grep
+;;; ace-jump-to-rg
 (defvar ajg/jumping nil
   "Internal flag for detecting if currently jumping to definition.")
 
-(defun ace-jump-to-git-grep ()
-  "Call `ace-jump-word-mode' and launch a  'jump-to-git-grep' function."
+(defun ace-jump-to-helm-rg ()
+  "Call `ace-jump-word-mode' and launch a  'jump-to-helm-rg' function."
   (interactive)
   (let ((ace-jump-mode-scope 'window)))
     (setq ajg/jumping t)
     (call-interactively 'ace-jump-word-mode))
 
 (defun ajg/maybe-jump-start ()
-  "Push the mark when jumping to git-grep with `ace-jump-char-mode'."
+  "Push the mark when jumping to helm-rg with `ace-jump-char-mode'."
   (when ajg/jumping
     (push-mark)))
 
 (defun ajg/maybe-jump-end ()
-  "Jump to git-grep after jumping with `ace-jump-word-mode.'."
-  (when ajg/jumping (call-interactively 'helm-git-grep-at-point))
+  "Jump to helm-rg after jumping with `ace-jump-word-mode.'."
+  (when ajg/jumping (call-interactively 'helm-rg))
   (setq ajg/jumping nil))
 
 (add-hook 'ace-jump-mode-before-jump-hook #'ajg/maybe-jump-start)

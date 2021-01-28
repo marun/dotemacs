@@ -47,6 +47,7 @@
 (depends-on "helm-flyspell")
 (depends-on "helm-git-grep")
 (depends-on "helm-projectile")
+(depends-on "helm-rg")
 (depends-on "helm-swoop")
 (depends-on "helm-themes")
 (depends-on "highlight-indentation")
