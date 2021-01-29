@@ -79,6 +79,7 @@
 (depends-on "puppet-mode")
 (depends-on "pytest")
 (depends-on "pyvenv")
+(depends-on "rustic")
 (depends-on "s")
 (depends-on "session")
 (depends-on "shut-up")
