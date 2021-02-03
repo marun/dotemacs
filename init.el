@@ -211,6 +211,7 @@
   :config
   (setq lsp-eldoc-render-all nil)
   (setq lsp-ui-doc-enable nil)
+  (setq lsp-headerline-breadcrumb-enable nil)
   (setq lsp-enable-file-watchers nil)
   (setq lsp-diagnostic-package :none)
   :commands lsp)
