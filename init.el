@@ -161,6 +161,10 @@
 (setq helm-scroll-amount 8)
 
 
+;;; helm-rg
+(setq helm-rg-default-directory 'git-root)
+
+
 ;;; NeoTree
 (require 'neotree)
 (global-set-key [f8] 'neotree-toggle)
