@@ -309,6 +309,7 @@
 
 ;;; Rust
 (use-package rustic)
+(setq rustic-format-trigger 'on-save)
 
 
 ;;; Javascript
