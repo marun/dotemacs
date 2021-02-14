@@ -101,6 +101,8 @@
 (setq split-height-threshold 0)
 (setq split-width-threshold 0)
 
+;; Display time in the modeline
+(display-time-mode 1)
 
 ;;; Save last position in buffer
 (require 'saveplace)
