@@ -87,6 +87,7 @@
 (depends-on "treemacs")
 (depends-on "treepy")
 (depends-on "use-package")
+(depends-on "w3m")
 (depends-on "with-editor")
 (depends-on "yaml-mode")
 (depends-on "yasnippet")
