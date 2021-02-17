@@ -348,6 +348,7 @@
    ((string= major-mode "go-mode") (call-interactively 'lsp-find-definition))
    ((string= major-mode "emacs-lisp-mode") (call-interactively 'find-function))
    ((string= major-mode "python-mode") (call-interactively 'lsp-find-definition))
+   ((string= major-mode "rustic-mode") (call-interactively 'lsp-find-definition))
    (t (message (format "No jump-to-definition function defined for '%s'." major-mode)))))
 (global-set-key (kbd "C-c C-j") (lambda () (interactive) (universal-jump-to-definition)))
 
