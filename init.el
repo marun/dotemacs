@@ -24,7 +24,7 @@
  '(custom-enabled-themes '(tsdh-light))
  '(markdown-command "/usr/bin/multimarkdown")
  '(package-selected-packages
-   '(w3m rustic helm-rg forge helm-git-grep lsp-treemacs pytest yasnippet-snippets helm-c-yasnippet bind-key dash-functional treepy lsp-python-ms use-package go-playground lsp-ui helm-company company-lsp lsp-mode flycheck-golangci-lint go-snippets transient ace-jump-mode ghub logito pkg-info popup go-dlv epl marshal pcache pyvenv async auto-complete cask company dash f find-file-in-project flycheck gh git-commit go-eldoc go-mode go-rename helm helm-core highlight-indentation ht ivy magit-popup package-build projectile s with-editor yasnippet gotest git-link yaml-mode session puppet-mode pbcopy pallet neotree monokai-theme markdown-mode magit key-chord helm-themes helm-swoop helm-projectile helm-flyspell go-projectile go-errcheck go-autocomplete flycheck-pyflakes exec-path-from-shell elpy dockerfile-mode company-go ace-jump-zap))
+   '(ob-rust ob-go w3m rustic helm-rg forge helm-git-grep lsp-treemacs pytest yasnippet-snippets helm-c-yasnippet bind-key dash-functional treepy lsp-python-ms use-package go-playground lsp-ui helm-company company-lsp lsp-mode flycheck-golangci-lint go-snippets transient ace-jump-mode ghub logito pkg-info popup go-dlv epl marshal pcache pyvenv async auto-complete cask company dash f find-file-in-project flycheck gh git-commit go-eldoc go-mode go-rename helm helm-core highlight-indentation ht ivy magit-popup package-build projectile s with-editor yasnippet gotest git-link yaml-mode session puppet-mode pbcopy pallet neotree monokai-theme markdown-mode magit key-chord helm-themes helm-swoop helm-projectile helm-flyspell go-projectile go-errcheck go-autocomplete flycheck-pyflakes exec-path-from-shell elpy dockerfile-mode company-go ace-jump-zap))
  '(projectile-enable-caching t)
  '(session-use-package t nil (session)))
 (custom-set-faces
@@ -191,6 +191,15 @@
 (define-key input-decode-map "\e[1;9B" [M-down])
 (define-key input-decode-map "\e[1;9C" [M-right])
 (define-key input-decode-map "\e[1;9D" [M-left])
+
+;; active Babel languages
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '(
+   (go . t)
+   (rust . t)
+   (shell . t)
+   ))
 
 
 ;;; Projectile
