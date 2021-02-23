@@ -125,6 +125,7 @@
 (key-chord-define-global "xf" 'helm-projectile-find-file)
 (key-chord-define-global "xg" 'helm-rg)
 (key-chord-define-global "xh" 'helm-projectile)
+(key-chord-define-global "xk" 'kill-current-buffer)
 (key-chord-define-global "xn" 'helm-projectile-find-file-in-known-projects)
 (key-chord-define-global "xr" 'rustic-popup)
 (key-chord-define-global "xo" 'ace-window)
