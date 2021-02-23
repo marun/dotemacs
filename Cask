@@ -55,6 +55,7 @@
 (depends-on "hydra")
 (depends-on "ivy")
 (depends-on "key-chord")
+(depends-on "kubel")
 (depends-on "logito")
 (depends-on "lsp-mode")
 (depends-on "lsp-python-ms")
