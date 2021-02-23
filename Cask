@@ -67,6 +67,8 @@
 (depends-on "marshal")
 (depends-on "monokai-theme")
 (depends-on "neotree")
+(depends-on "ob-go")
+(depends-on "ob-rust")
 (depends-on "org")
 (depends-on "package-build")
 (depends-on "pallet")
