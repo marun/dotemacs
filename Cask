@@ -53,6 +53,7 @@
 (depends-on "highlight-indentation")
 (depends-on "ht")
 (depends-on "hydra")
+(depends-on "hyperbole")
 (depends-on "ivy")
 (depends-on "key-chord")
 (depends-on "kubel")
