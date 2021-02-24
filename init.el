@@ -89,10 +89,11 @@
 (global-set-key (kbd "C-M-z") 'ace-jump-zap-to-char-dwim)
 
 ;; Visual indication of lines > 79 chars
-(require 'whitespace)
-(setq whitespace-line-column 79)
-(setq whitespace-style '(face lines-tail))
-(add-hook 'prog-mode-hook 'whitespace-mode)
+;; Disabled while I work on codebases with no regard for line length.
+;; (require 'whitespace)
+;; (setq whitespace-line-column 79)
+;; (setq whitespace-style '(face lines-tail))
+;; (add-hook 'prog-mode-hook 'whitespace-mode)
 
 ;; Ensure unique buffer names
 (require 'uniquify)
