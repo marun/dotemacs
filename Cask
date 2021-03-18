@@ -89,6 +89,7 @@
 (depends-on "shut-up")
 (depends-on "transient")
 (depends-on "treemacs")
+(depends-on "treemacs-projectile")
 (depends-on "treepy")
 (depends-on "use-package")
 (depends-on "w3m")
