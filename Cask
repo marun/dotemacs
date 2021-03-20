@@ -12,7 +12,6 @@
 (depends-on "cask")
 (depends-on "company")
 (depends-on "company-go")
-(depends-on "company-lsp")
 (depends-on "dash")
 (depends-on "dash-functional")
 (depends-on "dockerfile-mode")
