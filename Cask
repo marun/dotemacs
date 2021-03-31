@@ -28,6 +28,7 @@
 (depends-on "ghub")
 (depends-on "git-commit")
 (depends-on "git-link")
+(depends-on "git-messenger")
 (depends-on "go-autocomplete")
 (depends-on "go-dlv")
 (depends-on "go-eldoc")
