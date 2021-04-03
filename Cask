@@ -92,6 +92,8 @@
 (depends-on "treemacs-projectile")
 (depends-on "treepy")
 (depends-on "use-package")
+(depends-on "vterm")
+(depends-on "vterm-toggle")
 (depends-on "w3m")
 (depends-on "with-editor")
 (depends-on "yaml-mode")
