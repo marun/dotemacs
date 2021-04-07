@@ -22,6 +22,8 @@
  '(ansi-color-faces-vector
    [default default default italic underline success warning error])
  '(custom-enabled-themes '(tsdh-light))
+ '(git-messenger:show-detail t)
+ '(git-messenger:use-magit-popup t)
  '(markdown-command "/usr/bin/multimarkdown")
  '(package-selected-packages
    '(vterm-toggle vterm git-messenger treemacs-projectile hyperbole kubel ob-rust ob-go w3m rustic helm-rg forge helm-git-grep lsp-treemacs pytest yasnippet-snippets helm-c-yasnippet bind-key dash-functional treepy lsp-python-ms use-package go-playground lsp-ui helm-company lsp-mode flycheck-golangci-lint go-snippets transient ace-jump-mode ghub logito pkg-info popup go-dlv epl marshal pcache pyvenv async auto-complete cask company dash f find-file-in-project flycheck gh git-commit go-eldoc go-mode go-rename helm helm-core highlight-indentation ht ivy magit-popup package-build projectile s with-editor yasnippet gotest git-link yaml-mode session puppet-mode pbcopy pallet neotree monokai-theme markdown-mode magit key-chord helm-themes helm-swoop helm-projectile helm-flyspell go-projectile go-errcheck go-autocomplete flycheck-pyflakes exec-path-from-shell elpy dockerfile-mode company-go ace-jump-zap))
@@ -153,11 +155,6 @@
 
 ;;; git-messenger
 (global-set-key (kbd "C-x v p") 'git-messenger:popup-message)
-
-;; Use magit-show-commit for showing status/diff commands
-(custom-set-variables
- '(git-messenger:use-magit-popup t)
- '(git-messenger:show-detail t))
 
 
 ;;; Helm
