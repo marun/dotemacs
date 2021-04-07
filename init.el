@@ -250,7 +250,6 @@
   (setq lsp-enable-file-watchers nil)
   (setq lsp-diagnostic-package :none)
   :commands lsp)
-(use-package helm-lsp :commands helm-lsp-workspace-symbol)
 (global-set-key (kbd "C-c C-e") 'flymake-goto-next-error)
 
 
