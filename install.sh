@@ -38,5 +38,5 @@ tool_urls=(
 )
 export GOPATH=~/go
 for tool_url in ${tool_urls[@]}; do
-  go get -u "${tool_url}"
+  go install "${tool_url}@latest"
 done
