@@ -129,17 +129,9 @@
 (key-chord-define-global "xf" 'helm-projectile-find-file)
 (key-chord-define-global "xg" 'helm-rg)
 (key-chord-define-global "xh" 'helm-projectile)
-(key-chord-define-global "xk" 'kill-current-buffer)
-(key-chord-define-global "xn" 'helm-projectile-find-file-in-known-projects)
-(key-chord-define-global "xr" 'rustic-popup)
 (key-chord-define-global "xo" 'ace-window)
 (key-chord-define-global "xx" 'helm-M-x)
 (key-chord-define-global "xb" 'switch-to-buffer)
-(key-chord-define-global "x0" 'delete-window)
-(key-chord-define-global "x1" 'delete-other-windows)
-(key-chord-define-global "x2" 'split-window-below)
-(key-chord-define-global "x3" 'split-window-right)
-(key-chord-define-global "xy" 'yank)
 
 
 ;;; Enable backup files.
