@@ -4,23 +4,6 @@
 
 set -e
 
-# Install emacs 27 from source on linux to ensure a json parser written in c
-if [[ "`uname`" != 'Darwin' ]]; then
-  mkdir -p "${HOME}/src"
-  pushd "${HOME}/src" > /dev/null
-    git clone -b master git://git.sv.gnu.org/emacs.git
-    pushd emacs > /dev/null
-      git co --track origin/emacs-27
-      ./autogen.sh
-      ./configure --prefix="${HOME}/emacs" --bindir="${HOME}/bin"
-      make
-      make install
-    popd
-  popd
-  # Ensure emacs binary is in the path for the install
-  export PATH=${PATH}:${HOME}/bin
-fi
-
 # Install cask and language dependencies.
 
 if [ ! -d ~/.cask ]; then
