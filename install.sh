@@ -7,11 +7,14 @@ set -e
 # Install cask and language dependencies.
 
 if [ ! -d ~/.cask ]; then
-  curl -fsSL https://raw.githubusercontent.com/cask/cask/master/go | python3
+  git clone https://github.com/cask/cask ~/.cask
+  pushd ~/.cask > /dev/null
+    make install
+  popd > /dev/null
 fi
 
 pushd $(dirname $0) > /dev/null
-  python3 ~/.cask/bin/cask install
+  ~/.cask/bin/cask install
 popd > /dev/null
 
 # Install gimme
