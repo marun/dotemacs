@@ -22,6 +22,7 @@
  '(ansi-color-faces-vector
    [default default default italic underline success warning error])
  '(custom-enabled-themes '(tsdh-light))
+ '(dired-vc-rename-file t)
  '(git-messenger:show-detail t)
  '(git-messenger:use-magit-popup t)
  '(markdown-command "/usr/bin/multimarkdown")
