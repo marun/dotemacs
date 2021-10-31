@@ -310,9 +310,6 @@
   (local-set-key (kbd "C-c r") 'lsp-ui-peek-find-references)
   (local-set-key (kbd "C-c C-o") 'lsp-organize-imports)
 
-  ;; Prefer universal-jump-to-definition
-  (local-unset-key (kbd "C-c C-j"))
-
   ;;; Customize compile command to run go build
   (if (not (string-match "go" compile-command))
       (set (make-local-variable 'compile-command)
@@ -359,17 +356,6 @@
   ))
 
 
-;;; Common function for triggering jump-to-definition
-(defun universal-jump-to-definition ()
-  (cond
-   ((string= major-mode "go-mode") (call-interactively 'lsp-find-definition))
-   ((string= major-mode "emacs-lisp-mode") (call-interactively 'find-function))
-   ((string= major-mode "python-mode") (call-interactively 'lsp-find-definition))
-   ((string= major-mode "rustic-mode") (call-interactively 'lsp-find-definition))
-   (t (message (format "No jump-to-definition function defined for '%s'." major-mode)))))
-(global-set-key (kbd "C-c C-j") (lambda () (interactive) (universal-jump-to-definition)))
-
-
 ;;; ace-jump-to-definition
 (defvar ajd/jumping nil
   "Internal flag for detecting if currently jumping to definition.")
@@ -382,14 +368,16 @@
     (call-interactively 'ace-jump-word-mode))
 
 (defun ajd/maybe-jump-start ()
-  "Push the mark when jumping to definition with `ace-jump-char-mode'."
+  "Push the mark when jumping to definition with `ace-jump-word-mode'."
   (when ajd/jumping
     (push-mark)))
 
 (defun ajd/maybe-jump-end ()
   "Jump to definition after jumping with `ace-jump-word-mode.'."
   (when ajd/jumping
-    (universal-jump-to-definition))
+    (cond
+     ((string= major-mode "emacs-lisp-mode") (call-interactively 'xref-find-definitions))
+     (t (call-interactively 'lsp-find-definition))))
   (setq ajd/jumping nil))
 
 (add-hook 'ace-jump-mode-before-jump-hook #'ajd/maybe-jump-start)
