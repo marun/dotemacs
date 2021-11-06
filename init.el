@@ -223,19 +223,32 @@
 
 ;;; LSP
 (use-package lsp-mode
+  :commands lsp
   :hook
   (go-mode . lsp)
   (python-mode . lsp)
+  (lsp-mode . lsp-ui)
+  :custom
+  (lsp-rust-analyzer-cargo-watch-command "clippy")
+  (lsp-eldoc-render-all nil)
+  (lsp-ui-doc-enable nil)
+  (lsp-idle-delay 0.6)
+  (lsp-rust-analyzer-server-display-inlay-hints nil)
+  (lsp-headerline-bre0adcrumb-enable nil)
+  ;; (lsp-enable-file-watchers nil)
+  (lsp-diagnostic-package :none)
   :config
-  (setq lsp-eldoc-render-all nil)
-  (setq lsp-ui-doc-enable nil)
-  (setq lsp-headerline-breadcrumb-enable nil)
-  (setq lsp-enable-file-watchers nil)
-  (setq lsp-diagnostic-package :none)
-  (define-key lsp-mode-map [remap xref-find-apropos] #'helm-lsp-workspace-symbol)
-  :commands lsp)
+  (define-key lsp-mode-map [remap xref-find-apropos] #'helm-lsp-workspace-symbol))
 (use-package helm-lsp :commands helm-lsp-workspace-symbol)
 (global-set-key (kbd "C-c C-e") 'flymake-goto-next-error)
+
+(use-package lsp-ui
+  :ensure
+  :commands lsp-ui-mode
+  :custom
+  (lsp-ui-peek-always-show t)
+  (lsp-ui-sideline-show-hover t)
+  (lsp-ui-doc-enable nil))
 
 
 ;;; yasnippet
@@ -315,12 +328,18 @@
 
 
 ;;; Rust
-(use-package rustic)
-(setq rustic-format-trigger 'on-save)
+(use-package rustic
+  :ensure
+  :config
+  (setq rustic-format-on-save t))
 
 
 ;;; Javascript
 (setq js-indent-level 2)
+
+
+;; Flycheck
+(use-package flycheck :ensure)
 
 
 ;;; Flyspell
