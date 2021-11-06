@@ -419,3 +419,12 @@
 
 (add-hook 'ace-jump-mode-before-jump-hook #'ajg/maybe-jump-start)
 (add-hook 'ace-jump-mode-end-hook #'ajg/maybe-jump-end)
+
+
+;;; Enable fullscreen toggle for macos
+(defun toggle-fullscreen ()
+  "Toggle full screen"
+  (interactive)
+  (set-frame-parameter
+     nil 'fullscreen
+     (when (not (frame-parameter nil 'fullscreen)) 'fullboth)))
