@@ -6,6 +6,7 @@ ac-comphist.dat
 auto-save-list
 backups
 bookmarks
+eln-cache
 elpa
 eshell
 forge-database.sqlite
