@@ -1,21 +1,9 @@
 #!/usr/bin/env bash
 
-# Install cask and language dependencies.
+# Install language dependencies.
 
 set -e
 
-# Install cask and language dependencies.
-
-if [ ! -d ~/.cask ]; then
-  git clone https://github.com/cask/cask ~/.cask
-  pushd ~/.cask > /dev/null
-    make install
-  popd > /dev/null
-fi
-
-pushd $(dirname $0) > /dev/null
-  ~/.cask/bin/cask install
-popd > /dev/null
 
 # Install gimme
 if [ ! -f ~/bin/gimme ]; then

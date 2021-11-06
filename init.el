@@ -1,18 +1,5 @@
-;;; Compatible with Emacs 24.3 and above
-
-;;; Cask / Pallet boilerplate
-
-;; Added by Package.el.  This must come before configurations of
-;; installed packages.  Don't delete this line.  If you don't want it,
-;; just comment it out by adding a semicolon to the start of the line.
-;; You may delete these explanatory comments.
-(when (version< emacs-version "27.0") (package-initialize))
-
-(require 'cask "~/.cask/cask.el")
-(cask-initialize)
-(require 'pallet)
-(pallet-mode t)
-
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -27,9 +14,10 @@
  '(git-messenger:use-magit-popup t)
  '(markdown-command "/usr/bin/multimarkdown")
  '(package-selected-packages
-   '(speed-type json-mode helm-lsp vterm-toggle vterm git-messenger treemacs-projectile hyperbole kubel ob-rust ob-go w3m rustic helm-rg forge helm-git-grep lsp-treemacs pytest yasnippet-snippets helm-c-yasnippet bind-key dash-functional treepy lsp-python-ms use-package go-playground lsp-ui helm-company lsp-mode flycheck-golangci-lint go-snippets transient ace-jump-mode ghub logito pkg-info popup go-dlv epl marshal pcache pyvenv async auto-complete cask company dash f find-file-in-project flycheck gh git-commit go-eldoc go-mode go-rename helm helm-core highlight-indentation ht ivy magit-popup package-build projectile s with-editor yasnippet gotest git-link yaml-mode session puppet-mode pbcopy pallet neotree monokai-theme markdown-mode magit key-chord helm-themes helm-swoop helm-projectile helm-flyspell go-projectile go-errcheck go-autocomplete flycheck-pyflakes exec-path-from-shell elpy dockerfile-mode company-go ace-jump-zap))
+   '(hyperbole speed-type json-mode helm-lsp vterm-toggle vterm git-messenger treemacs-projectile kubel ob-rust ob-go w3m rustic helm-rg forge helm-git-grep lsp-treemacs pytest yasnippet-snippets helm-c-yasnippet bind-key dash-functional treepy lsp-python-ms use-package go-playground lsp-ui helm-company lsp-mode flycheck-golangci-lint go-snippets transient ace-jump-mode ghub logito pkg-info popup go-dlv epl marshal pcache pyvenv async auto-complete cask company dash f find-file-in-project flycheck gh git-commit go-eldoc go-mode go-rename helm helm-core highlight-indentation ht ivy magit-popup package-build projectile s with-editor yasnippet gotest git-link yaml-mode session puppet-mode pbcopy pallet neotree monokai-theme markdown-mode magit key-chord helm-themes helm-swoop helm-projectile helm-flyspell go-projectile go-errcheck go-autocomplete flycheck-pyflakes exec-path-from-shell elpy dockerfile-mode company-go ace-jump-zap))
  '(projectile-enable-caching t)
- '(session-use-package t nil (session)))
+ '(session-use-package t nil (session))
+ '(warning-suppress-types '((comp))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -63,8 +51,13 @@
 
 (load-theme 'monokai t)
 
-;; Disable menu bar by default
-(menu-bar-mode 0)
+;; Disable menu bar in the cli
+(unless (display-graphic-p)
+  (menu-bar-mode 0))
+
+;; Minimize ui elements
+(tool-bar-mode -1)
+(toggle-scroll-bar -1)
 
 ;; Show column on status line
 (setq column-number-mode t)
