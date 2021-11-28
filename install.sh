@@ -29,3 +29,8 @@ export GOPATH=~/go
 for tool_url in ${tool_urls[@]}; do
   go install "${tool_url}@latest"
 done
+
+# Recommended to install binary
+# TODO Enable installation on linux
+brew install golangci-lint
+brew upgrade golangci-lint
