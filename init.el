@@ -144,6 +144,10 @@
 (global-set-key (kbd "C-x v p") 'git-messenger:popup-message)
 
 
+;;; company-mode
+(setq company-selection-wrap-around t)
+
+
 ;;; Helm
 (require 'helm-config)
 (helm-mode 1)
