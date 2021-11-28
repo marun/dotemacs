@@ -279,9 +279,6 @@
 ;;; Go
 (add-hook 'before-save-hook 'gofmt-before-save)
 
-;; Default to using vendoring until go1.14 enables detection
-(setenv "GOFLAGS" "-mod=vendor")
-
 ;; Provide a reasonable default for kubeconfig
 (setenv "KUBECONFIG" (concat (getenv "HOME") "/.kube/default-kubeconfig"))
 
