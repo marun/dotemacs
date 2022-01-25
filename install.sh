@@ -13,7 +13,7 @@ if [ ! -f ~/bin/gimme ]; then
 fi
 
 # Install golang dev tools
-eval $(~/bin/gimme 1.17.3)
+eval $(~/bin/gimme 1.17.6)
 tool_urls=(
   'github.com/go-delve/delve/cmd/dlv'
   'github.com/kisielk/errcheck'
