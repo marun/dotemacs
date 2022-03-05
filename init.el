@@ -37,6 +37,7 @@
 (global-set-key (kbd "C-c d") 'dlv)
 (global-set-key (kbd "C-c t") 'vterm)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
+(global-set-key (kbd "C-M-f") 'toggle-fullscreen)
 
 
 ;;; UX niceties
