@@ -407,6 +407,8 @@
 (when (equal (symbol-name system-type) "darwin")
   ;; Fix x11 support
   (setq mac-option-modifier 'meta)
+  ;; Disable scroll bar
+  (toggle-scroll-bar -1)
   ;; Enable copy-paste integration on os x
   (require 'pbcopy)
   (turn-on-pbcopy))
