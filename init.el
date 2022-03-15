@@ -48,6 +48,10 @@
 
 ;;; UX niceties
 
+;; Show hostname in the mode line
+(let ((pos (memq 'mode-line-modes mode-line-format)))
+  (setcdr pos (cons (getenv "HOSTNAME") (cdr pos))))
+
 ;; Replace the active region by typing text
 (delete-selection-mode 1)
 
