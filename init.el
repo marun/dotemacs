@@ -69,7 +69,6 @@
 
 ;; Minimize ui elements
 (tool-bar-mode -1)
-(toggle-scroll-bar -1)
 
 ;; Show column on status line
 (setq column-number-mode t)
