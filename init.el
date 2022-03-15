@@ -1,3 +1,9 @@
+;; Ensure automatic generation of compiled files
+(setq comp-deferred-compilation t)
+
+;; Ensure lsp uses higher-performing plists in preference to hash-tables
+(setq lsp-use-plists t)
+
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 
@@ -255,6 +261,14 @@
   (lsp-ui-peek-always-show t)
   (lsp-ui-sideline-show-hover t)
   (lsp-ui-doc-enable nil))
+
+;; Set gc threshold higher to account for lsp's client/server communication overhead
+(setq gc-cons-threshold 100000000)
+
+;; LSP responds are in hundreds of not thousands of kb
+(setq read-process-output-max (* 1024 1024)) ;; 1mb
+
+(setq lsp-log-io nil) ; if set to true can cause a performance hit
 
 
 ;; dap
