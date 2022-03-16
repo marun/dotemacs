@@ -232,6 +232,7 @@
 
 ;;; Magit
 (setq magit-last-seen-setup-instructions "1.4.0")
+(setq magit-save-repository-buffers nil)
 (global-set-key (kbd "C-c g") 'magit-status)
 (use-package forge
     :after magit)
