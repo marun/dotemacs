@@ -114,10 +114,11 @@
 ;; Display time in the modeline
 (display-time-mode 1)
 
-;;; Save last position in buffer
+;; Save last position in buffer
 (require 'saveplace)
 (setq-default save-place t)
 (setq save-place-file (concat user-emacs-directory "saved-places"))
+
 ;; Ignore files matching save-place-skip-check-regexp
 (setq-default save-place-save-skipped nil)
 
