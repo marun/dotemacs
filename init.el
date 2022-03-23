@@ -63,6 +63,8 @@
 
 (load-theme 'monokai t)
 
+(setq visible-bell t)
+
 ;; Disable menu bar in the cli
 (unless (display-graphic-p)
   (menu-bar-mode 0))
