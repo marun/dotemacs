@@ -425,6 +425,13 @@
   ))
 
 
+;;; vterm
+(use-package vterm
+  :commands vterm
+  :config
+  (setq vterm-max-scrollback 10000))
+
+
 ;;; ace-jump-to-definition
 (defvar ajd/jumping nil
   "Internal flag for detecting if currently jumping to definition.")
