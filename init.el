@@ -20,7 +20,7 @@
  '(git-messenger:use-magit-popup t)
  '(markdown-command "/usr/bin/multimarkdown")
  '(package-selected-packages
-   '(dap-mode ein hyperbole speed-type json-mode helm-lsp vterm-toggle vterm git-messenger kubel ob-rust ob-go w3m rustic helm-rg forge helm-git-grep pytest yasnippet-snippets helm-c-yasnippet bind-key dash-functional treepy lsp-python-ms use-package go-playground lsp-ui helm-company lsp-mode flycheck-golangci-lint go-snippets transient ace-jump-mode ghub logito pkg-info popup go-dlv epl marshal pcache pyvenv async auto-complete cask company dash f find-file-in-project flycheck gh git-commit go-eldoc go-mode go-rename helm helm-core highlight-indentation ht ivy magit-popup package-build projectile s with-editor yasnippet gotest git-link yaml-mode session puppet-mode pbcopy pallet neotree monokai-theme markdown-mode magit key-chord helm-themes helm-swoop helm-projectile helm-flyspell go-projectile go-errcheck go-autocomplete flycheck-pyflakes exec-path-from-shell elpy dockerfile-mode company-go ace-jump-zap))
+   '(ibuffer-vc dap-mode ein hyperbole speed-type json-mode helm-lsp vterm-toggle vterm git-messenger kubel ob-rust ob-go w3m rustic helm-rg forge helm-git-grep pytest yasnippet-snippets helm-c-yasnippet bind-key dash-functional treepy lsp-python-ms use-package go-playground lsp-ui helm-company lsp-mode flycheck-golangci-lint go-snippets transient ace-jump-mode ghub logito pkg-info popup go-dlv epl marshal pcache pyvenv async auto-complete cask company dash f find-file-in-project flycheck gh git-commit go-eldoc go-mode go-rename helm helm-core highlight-indentation ht ivy magit-popup package-build projectile s with-editor yasnippet gotest git-link yaml-mode session puppet-mode pbcopy pallet neotree monokai-theme markdown-mode magit key-chord helm-themes helm-swoop helm-projectile helm-flyspell go-projectile go-errcheck go-autocomplete flycheck-pyflakes exec-path-from-shell elpy dockerfile-mode company-go ace-jump-zap))
  '(projectile-enable-caching t)
  '(session-use-package t nil (session))
  '(warning-suppress-types '((comp))))
@@ -123,6 +123,14 @@
 
 ;; Ignore files matching save-place-skip-check-regexp
 (setq-default save-place-save-skipped nil)
+
+
+;;; Group by vc root in ibuffer
+(add-hook 'ibuffer-hook
+              (lambda ()
+                (ibuffer-vc-set-filter-groups-by-vc-root)
+                (unless (eq ibuffer-sorting-mode 'alphabetic)
+                  (ibuffer-do-sort-by-alphabetic))))
 
 
 ;;; Key chords
