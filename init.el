@@ -1,9 +1,6 @@
 ;; Ensure automatic generation of compiled files
 (setq comp-deferred-compilation t)
 
-;; Ensure lsp uses higher-performing plists in preference to hash-tables
-(setq lsp-use-plists t)
-
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 
@@ -20,7 +17,7 @@
  '(git-messenger:use-magit-popup t)
  '(markdown-command "/usr/bin/multimarkdown")
  '(package-selected-packages
-   '(mode-line-bell dap-mode ein hyperbole speed-type json-mode helm-lsp vterm-toggle vterm git-messenger kubel ob-rust ob-go w3m rustic helm-rg forge helm-git-grep pytest yasnippet-snippets helm-c-yasnippet bind-key dash-functional treepy lsp-python-ms use-package go-playground lsp-ui helm-company lsp-mode flycheck-golangci-lint go-snippets transient ace-jump-mode ghub logito pkg-info popup go-dlv epl marshal pcache pyvenv async auto-complete cask company dash f find-file-in-project flycheck gh git-commit go-eldoc go-mode go-rename helm helm-core highlight-indentation ht ivy magit-popup package-build projectile s with-editor yasnippet gotest git-link yaml-mode session puppet-mode pbcopy pallet neotree monokai-theme markdown-mode magit key-chord helm-themes helm-swoop helm-projectile helm-flyspell go-projectile go-errcheck go-autocomplete flycheck-pyflakes exec-path-from-shell elpy dockerfile-mode company-go ace-jump-zap))
+   '(mode-line-bell ein hyperbole speed-type json-mode vterm-toggle vterm git-messenger kubel ob-rust ob-go w3m rustic helm-rg forge helm-git-grep pytest yasnippet-snippets helm-c-yasnippet bind-key dash-functional treepy use-package go-playground helm-company flycheck-golangci-lint go-snippets transient ace-jump-mode ghub logito pkg-info popup go-dlv epl marshal pcache pyvenv async auto-complete cask company dash f find-file-in-project flycheck gh git-commit go-eldoc go-mode go-rename helm helm-core highlight-indentation ht ivy magit-popup package-build projectile s with-editor yasnippet gotest git-link yaml-mode session puppet-mode pbcopy pallet neotree monokai-theme markdown-mode magit key-chord helm-themes helm-swoop helm-projectile helm-flyspell go-projectile go-errcheck go-autocomplete flycheck-pyflakes exec-path-from-shell elpy dockerfile-mode company-go ace-jump-zap))
  '(projectile-enable-caching t)
  '(session-use-package t nil (session))
  '(warning-suppress-types '((comp))))
@@ -255,93 +252,11 @@
     :after magit)
 
 
-;;; LSP
-(use-package lsp-mode
-  :commands lsp
-  :hook
-  (go-mode . lsp)
-  (python-mode . lsp)
-  (lsp-mode . lsp-ui)
-  :custom
-  (lsp-rust-analyzer-cargo-watch-command "clippy")
-  (lsp-eldoc-render-all nil)
-  (lsp-ui-doc-enable nil)
-  (lsp-idle-delay 0.6)
-  (lsp-rust-analyzer-server-display-inlay-hints nil)
-  (lsp-headerline-bre0adcrumb-enable nil)
-  ;; (lsp-enable-file-watchers nil)
-  (lsp-diagnostic-package :none)
-  :config
-  (define-key lsp-mode-map [remap xref-find-apropos] #'helm-lsp-workspace-symbol))
-(use-package helm-lsp :commands helm-lsp-workspace-symbol)
-(global-set-key (kbd "C-c C-e") 'flymake-goto-next-error)
-
-(use-package lsp-ui
-  :ensure
-  :commands lsp-ui-mode
-  :custom
-  (lsp-ui-peek-always-show t)
-  (lsp-ui-sideline-show-hover t)
-  (lsp-ui-doc-enable nil))
-
-;; Set gc threshold higher to account for lsp's client/server communication overhead
-(setq gc-cons-threshold 100000000)
-
-;; LSP responds are in hundreds of not thousands of kb
-(setq read-process-output-max (* 1024 1024)) ;; 1mb
-
-(setq lsp-log-io nil) ; if set to true can cause a performance hit
-
-
-;; dap
-(use-package exec-path-from-shell
-  :ensure
-  :init (exec-path-from-shell-initialize))
-
-(use-package dap-mode
-  :ensure
-  :config
-  (dap-ui-mode)
-  (dap-ui-controls-mode 1)
-  (dap-mode 1)
-  (setq dap-print-io t)
-
-  (require 'dap-go)
-  (dap-go-setup)
-
-  (require 'dap-lldb)
-  (require 'dap-gdb-lldb)
-  ;; installs .extension/vscode
-  (dap-gdb-lldb-setup)
-
-  (dap-register-debug-template
-   "Rust::LLDB Run Configuration"
-   (list :type "lldb"
-         :request "launch"
-         :name "LLDB::Run"
-	     :gdbpath "rust-lldb"
-         :target nil
-         :cwd nil)))
-
-
 ;;; yasnippet
 (use-package yasnippet
   :ensure t
   :init
   (yas-global-mode 1))
-
-
-;;; Python
-(use-package lsp-python-ms
-  :ensure t
-  :hook (python-mode . (lambda ()
-                          (require 'lsp-python-ms)
-                          (lsp-deferred)
-                          (local-set-key (kbd "C-c C-t") 'pytest-one)
-                          ;; This key binding is used globally for jump-to-definition
-                          (local-unset-key (kbd "C-c C-j"))
-                          (local-set-key (kbd "C-c r") (kbd "C-u C-c C-c") ))))
-(setq python-shell-interpreter "python3")
 
 
 ;;; Go
@@ -383,8 +298,6 @@
 (defun maru-go-mode-hook ()
   (local-set-key (kbd "C-c f") 'go-test-current-file)
   (local-set-key (kbd "C-c t") 'go-test-current-test)
-  (local-set-key (kbd "C-c r") 'lsp-find-references)
-  (local-set-key (kbd "C-c C-o") 'lsp-organize-imports)
 
   ;;; Customize compile command to run go build
   (if (not (string-match "go" compile-command))
@@ -466,9 +379,7 @@
 (defun ajd/maybe-jump-end ()
   "Jump to definition after jumping with `ace-jump-word-mode.'."
   (when ajd/jumping
-    (cond
-     ((string= major-mode "emacs-lisp-mode") (call-interactively 'xref-find-definitions))
-     (t (call-interactively 'lsp-find-definition))))
+    (call-interactively 'xref-find-definitions))
   (setq ajd/jumping nil))
 
 (add-hook 'ace-jump-mode-before-jump-hook #'ajd/maybe-jump-start)
