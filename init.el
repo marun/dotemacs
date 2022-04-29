@@ -308,6 +308,7 @@
   (require 'go-projectile)
   )
 (add-hook 'go-mode-hook 'maru-go-mode-hook)
+(add-hook 'go-mode-hook 'eglot-ensure)
 
 
 ;;; Rust
