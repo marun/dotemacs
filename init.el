@@ -316,6 +316,7 @@
 (use-package rustic
   :ensure
   :config
+  (setq rustic-lsp-client 'eglot)
   (setq rustic-format-on-save t))
 
 
