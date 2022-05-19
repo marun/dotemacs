@@ -58,7 +58,7 @@
 ;; Enable quick confirmation
 (fset 'yes-or-no-p 'y-or-n-p)
 
-(load-theme 'monokai t)
+(load-theme 'modus-vivendi t)
 
 (mode-line-bell-mode)
 
