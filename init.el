@@ -312,6 +312,21 @@
 (add-hook 'go-mode-hook 'eglot-ensure)
 
 
+;;; Eglot
+(use-package eglot :ensure t)
+(add-to-list 'eglot-server-programs '(python-mode "pylsp_wrapper"))
+
+
+;;; Python
+(use-package python-mode
+  :ensure nil
+  :hook
+  (python-mode . eglot-ensure)
+  :custom
+  (python-shell-interpreter "python3.7")
+  )
+
+
 ;;; Rust
 (use-package rustic
   :ensure
