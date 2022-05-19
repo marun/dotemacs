@@ -24,3 +24,5 @@ var
 /projects
 /.extension/
 /.dap-breakpoints
+/network-security.data
+/.cask/
