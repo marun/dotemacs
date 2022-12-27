@@ -335,6 +335,8 @@
   :config
   (setq rustic-lsp-client 'eglot)
   (setq rustic-format-on-save t))
+(add-hook 'eglot--managed-mode-hook (lambda () (flymake-mode -1)))
+(add-hook 'eglot--managed-mode-hook (lambda () (eldoc-mode -1)))
 
 
 ;;; Javascript
